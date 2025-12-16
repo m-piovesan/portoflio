@@ -1,11 +1,13 @@
 <script setup>
+import { en, es, pt_br } from '@nuxt/ui/locale'
+
 const versions = [
     {
         title: 'Nasci',
         description:
             'Nasci mlkada',
         date: '2025-04-27T00:00:00.000Z',
-        badge: 'v3.17.0',
+        badge: 'Pessoal',
         target: '_blank',
     },
     {
@@ -13,7 +15,7 @@ const versions = [
         description: 'Nuxt 3.16 is out - packed with features and performance improvements!',
         date: '2024-03-07T00:00:00.000Z',
         image: 'https://nuxt.com/assets/blog/v3.16.png',
-        badge: 'v3.16.0',
+        badge: 'Profissional',
         target: '_blank',
     },
     {
@@ -21,11 +23,13 @@ const versions = [
         description: 'Nuxt 3.15 is out - with Vite 6, better HMR and faster performance!',
         date: '2024-12-24T00:00:00.000Z',
         image: 'https://nuxt.com/assets/blog/v3.15.png',
-        badge: 'v3.15.0',
+        badge: 'Acadêmico',
         to: 'https://nuxt.com/blog/v3-15',
         target: '_blank',
     }
 ]
+
+const locale = ref('en')
 </script>
 
 <template>
@@ -39,6 +43,9 @@ const versions = [
                 <UButton color="neutral" variant="ghost" to="https://github.com/m-piovesan" target="_blank"
                     icon="i-simple-icons-github" aria-label="GitHub" />
             </UTooltip>
+
+            <ULocaleSelect v-model="locale" :locales="[en, es, pt_br]" class="w-48" />
+
         </template>
     </UHeader>
 
@@ -69,9 +76,21 @@ const versions = [
 
         <template #right>
             <UPageAside>
-                <span>oi</span>
-                <span>tudo</span>
-                <span>bem</span>
+                <span>you can reach me at:</span>
+
+                <div class="flex flex-col size-full gap-3">
+                    <UButton class="w-full h-20 bg-instagram">
+                        Instagram
+                    </UButton>
+
+                    <UButton class="w-full h-20">
+                        Instagram
+                    </UButton>
+
+                    <UButton class="w-full h-20">
+                        Instagram
+                    </UButton>
+                </div>
             </UPageAside>
         </template>
     </UPage>
