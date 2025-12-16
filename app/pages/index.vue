@@ -1,25 +1,12 @@
 <script setup>
 const versions = [
     {
-        title: 'Nuxt 3.17',
+        title: 'Nasci',
         description:
-            'Nuxt 3.17 is out - bringing a major reworking of the async data layer, a new built-in component, better warnings, and performance improvements!',
+            'Nasci mlkada',
         date: '2025-04-27T00:00:00.000Z',
-        image: 'https://nuxt.com/assets/blog/v3.17.png',
         badge: 'v3.17.0',
-        to: 'https://nuxt.com/blog/nuxt-3-17',
         target: '_blank',
-        authors: [
-            {
-                name: 'Daniel Roe',
-                avatar: {
-                    src: 'https://github.com/danielroe.png',
-                    alt: 'Daniel Roe'
-                },
-                to: 'https://github.com/danielroe',
-                target: '_blank'
-            }
-        ]
     },
     {
         title: 'Nuxt 3.16',
@@ -27,7 +14,6 @@ const versions = [
         date: '2024-03-07T00:00:00.000Z',
         image: 'https://nuxt.com/assets/blog/v3.16.png',
         badge: 'v3.16.0',
-        to: 'https://nuxt.com/blog/v3-16',
         target: '_blank',
     },
     {
@@ -43,7 +29,7 @@ const versions = [
 </script>
 
 <template>
-    <UHeader class="h-[20vh]" title="Matheus Piovesan">
+    <UHeader class="h-[20vh] relative" title="Matheus">
         <UAvatar src="https://github.com/m-piovesan.png" class="size-40 -mb-20" />
 
         <template #right>
@@ -58,23 +44,31 @@ const versions = [
 
     <UPage>
         <template #left>
-            <UPageAside class="bg-purple-700">
-                <span>oi</span>
-                <span>tudo</span>
-                <span>bem</span>
+            <UPageAside>
+                <div class="flex flex-col h-full justify-center gap-3">
+                    <span> filtrar</span>
+                    <UBadge icon="i-lucide-rocket" class="font-bold rounded-full">Badge</UBadge>
+                    <UBadge icon="i-lucide-rocket" class="font-bold rounded-full">Badge</UBadge>
+                    <UBadge icon="i-lucide-rocket" class="font-bold rounded-full">Badge</UBadge>
+                </div>
             </UPageAside>
         </template>
 
-        <UChangelogVersions>
-            <UChangelogVersion v-for="version in versions" :key="version.title" v-bind="version"
-                class="flex items-start" :ui="{
-                    container: 'max-w-lg me-0',
+        <UPageBody>
+            <UChangelogVersions class="pt-8">
+                <UChangelogVersion v-for="version in versions" :key="version.title" v-bind="version" :badge="{
+                    label:
+                        version.badge, color: 'primary', variant: 'outline'
+                }" class="flex items-start cursor-default" :ui="{
+                    indicator: 'sticky top-(--ui-header-height)',
+                    container: 'ml-20 ms-0',
                 }">
-            </UChangelogVersion>
-        </UChangelogVersions>
+                </UChangelogVersion>
+            </UChangelogVersions>
+        </UPageBody>
 
         <template #right>
-            <UPageAside class="bg-amber-400">
+            <UPageAside>
                 <span>oi</span>
                 <span>tudo</span>
                 <span>bem</span>
