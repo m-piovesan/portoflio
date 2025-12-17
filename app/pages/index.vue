@@ -1,35 +1,87 @@
-<script setup>
+<script setup lang="ts">
 import { en, es, pt_br } from '@nuxt/ui/locale'
+import type { Badge, Post } from '~/types';
 
-const versions = [
+const timeline: Post[] = [
     {
-        title: 'Nasci',
+        title: 'Nasci :)',
         description:
-            'Nasci mlkada',
-        date: '2025-04-27T00:00:00.000Z',
-        badge: 'Pessoal',
-        target: '_blank',
+            'nascido e criado em Videira-SC (Brasil), tô deixando informado aí caso algum de vocês queira me mandar um presente no meu anivesário kkkkkkk entra em contato comigo em alguma das redes que deixei aí que eu passo meu pix;',
+        date: new Date('2003-11-12T00:00:00.000Z'),
+        badge: 'Personal',
+    },
+    {
+        title: 'Mudança para Curitiba',
+        description:
+            'saímos bem cedo de Videira, eu, meus pais e meu irmão, a viagem deu umas 5h no total. Videira e Curitiba ficam a uns 330km então é uma viagem consideravelmente cansativa, mas obviamente estava bem animado, a gente já tinha visto e alugado o apartamento uns tempos antes, então basicamente separei minhas roupas, computador e tals e foi isso;',
+        date: new Date('2022-06-07T00:00:00.000Z'),
+        badge: 'Personal',
+    },
+    {
+        title: 'IFC',
+        description:
+            'acho relevante compartilhar um pouco sobre meus anos de EM, estudei integralmente no IFC (Instituto Federal Catarinense) Câmpus Videira, uma escola técnica federal, que foi onde tive meus primeiros contatos mais profundos com a computação, visto que eu cursei o técnico em informática. Foi uma época daora demais, infelizmente peguei o período da pandemia mas o terceirão principalmente foi legal por demais. Um salve pro professor Manfe que ensinou html e css básico pra gente, olha só onde isso me levou hoje em dia kkkkkk;',
+        date: new Date('2019-02-27T00:00:00.000Z'),
+        badge: 'Personal',
     },
     {
         title: 'Nuxt 3.16',
         description: 'Nuxt 3.16 is out - packed with features and performance improvements!',
-        date: '2024-03-07T00:00:00.000Z',
+        date: new Date('2024-03-07T00:00:00.000Z'),
         image: 'https://nuxt.com/assets/blog/v3.16.png',
-        badge: 'Profissional',
-        target: '_blank',
+        badge: 'Professional',
     },
     {
         title: 'Nuxt 3.15',
         description: 'Nuxt 3.15 is out - with Vite 6, better HMR and faster performance!',
-        date: '2024-12-24T00:00:00.000Z',
+        date: new Date('2024-12-24T00:00:00.000Z'),
         image: 'https://nuxt.com/assets/blog/v3.15.png',
-        badge: 'Acadêmico',
+        badge: 'Academic',
         to: 'https://nuxt.com/blog/v3-15',
-        target: '_blank',
+    }
+]
+
+const badges: Badge[] = [
+    {
+        label: 'Personal',
+        icon: 'i-lucide-user-round',
+    },
+    {
+        label: 'Academic',
+        icon: 'i-lucide-graduation-cap',
+    },
+    {
+        label: 'Professional',
+        icon: 'i-lucide-code',
+    },
+    {
+        label: 'Hobbies',
+        icon: 'i-lucide-hand-metal',
+    },
+    {
+        label: 'Others',
+        icon: 'i-lucide-box',
     }
 ]
 
 const locale = ref('en')
+
+const selectedBadges = ref<string[]>([])
+
+function toggleBadgeFilter(badgeLabel: string) {
+    if (selectedBadges.value.includes(badgeLabel)) {
+        selectedBadges.value = selectedBadges.value.filter(label => label !== badgeLabel)
+    } else selectedBadges.value.push(badgeLabel)
+}
+
+const filteredTimeline = computed(() => {
+    if (!selectedBadges.value.length) return timeline.toSorted((a, b) => a.date.getTime() - b.date.getTime())
+
+    return timeline
+        .filter(post => selectedBadges.value.includes(post.badge))
+        .toSorted((a, b) => a.date.getTime() - b.date.getTime())
+})
+
 </script>
 
 <template>
@@ -54,37 +106,26 @@ const locale = ref('en')
                 <div class="flex flex-col size-full justify-center gap-3 ml-4">
                     <span class="text-secondary">filter by:</span>
 
-                    <UBadge icon="i-lucide-user-round"
-                        class="font-bold rounded-full cursor-pointer h-10 gap-2 hover:scale-105 transition-transform">
-                        Personal
+                    <UBadge v-for="badge in badges" :key="badge.label" :icon="badge.icon" color="warning"
+                        variant="subtle"
+                        class="font-bold rounded-full cursor-pointer h-8 gap-2 hover:scale-105 transition-transform"
+                        :class="{
+                            'ring-2 ring-warning': selectedBadges.includes(badge.label)
+                        }" @click="toggleBadgeFilter(badge.label)">
+                        {{ badge.label }}
                     </UBadge>
 
-                    <UBadge icon="i-lucide-graduation-cap"
-                        class="font-bold rounded-full cursor-pointer h-10 gap-2 hover:scale-105 transition-transform">
-                        Academic
-                    </UBadge>
-
-                    <UBadge icon="i-lucide-code"
-                        class="font-bold rounded-full cursor-pointer h-10 gap-2 hover:scale-105 transition-transform">
-                        Professional
-                    </UBadge>
-
-                    <UBadge icon="i-lucide-hand-metal"
-                        class="font-bold rounded-full cursor-pointer h-10 gap-2 hover:scale-105 transition-transform">
-                        Hobbies
-                    </UBadge>
                 </div>
             </UPageAside>
         </template>
 
         <UPageBody>
             <UChangelogVersions class="pt-8">
-                <UChangelogVersion v-for="version in versions" :key="version.title" v-bind="version" :badge="{
-                    label:
-                        version.badge, color: 'primary', variant: 'outline'
+                <UChangelogVersion v-for="post in filteredTimeline" :key="post.title" v-bind="post" :badge="{
+                    icon: badges.find(b => b.label === post.badge)?.icon, color: 'primary', variant: 'subtle'
                 }" class="flex items-start cursor-default" :ui="{
                     indicator: 'sticky top-(--ui-header-height)',
-                    container: 'ml-20 ms-0',
+                    container: 'ml-20',
                 }">
                 </UChangelogVersion>
             </UChangelogVersions>
@@ -94,7 +135,7 @@ const locale = ref('en')
             <UPageAside>
                 <div class="flex flex-col size-full gap-3">
                     <span class="text-secondary">$ whoami</span>
-                    <p class="text-sm/snug">Desenvolvedor Full-Stack com ampla experiência em tecnologias como React,
+                    <p class="text-sm/snug">desenvolvedor Full-Stack com ampla experiência em tecnologias como React,
                         Vue, Typescript,
                         Svelte, React Native, Tailwind, SASS, além de familiaridade com ambientes Linux, controle de
                         versão com
@@ -106,19 +147,19 @@ const locale = ref('en')
                 <div class="flex flex-col size-full gap-3">
                     <UButton icon="i-lucide-linkedin"
                         class="w-full h-20 flex justify-center items-center hover:scale-105 transition-transform"
-                        color="secondary">
+                        color="secondary" to="https://www.linkedin.com/in/matheus-mpiovesan/" target="_blank">
                         Linkedin
                     </UButton>
 
                     <UButton icon="i-lucide-github"
                         class="w-full h-20 flex justify-center items-center hover:scale-105 transition-transform"
-                        color="secondary">
+                        color="secondary" to="https://github.com/m-piovesan" target="_blank">
                         GitHub
                     </UButton>
 
                     <UButton icon="i-lucide-instagram"
                         class="w-full h-20 flex justify-center items-center hover:scale-105 transition-transform"
-                        color="secondary">
+                        color="secondary" to="https://www.instagram.com/piovesann__/" target="_blank">
                         Instagram
                     </UButton>
                 </div>
