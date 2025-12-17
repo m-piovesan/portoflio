@@ -33,7 +33,7 @@ const locale = ref('en')
 </script>
 
 <template>
-    <UHeader class="h-[20vh] relative" title="Matheus">
+    <UHeader class="h-[20vh] relative" title="Matheus Piovesan">
         <UAvatar src="https://github.com/m-piovesan.png" class="size-40 -mb-20" />
 
         <template #right>
@@ -45,18 +45,34 @@ const locale = ref('en')
             </UTooltip>
 
             <ULocaleSelect v-model="locale" :locales="[en, es, pt_br]" class="w-48" />
-
         </template>
     </UHeader>
 
     <UPage>
         <template #left>
             <UPageAside>
-                <div class="flex flex-col h-full justify-center gap-3">
-                    <span> filtrar</span>
-                    <UBadge icon="i-lucide-rocket" class="font-bold rounded-full">Badge</UBadge>
-                    <UBadge icon="i-lucide-rocket" class="font-bold rounded-full">Badge</UBadge>
-                    <UBadge icon="i-lucide-rocket" class="font-bold rounded-full">Badge</UBadge>
+                <div class="flex flex-col size-full justify-center gap-3 ml-4">
+                    <span class="text-secondary">filter by:</span>
+
+                    <UBadge icon="i-lucide-user-round"
+                        class="font-bold rounded-full cursor-pointer h-10 gap-2 hover:scale-105 transition-transform">
+                        Personal
+                    </UBadge>
+
+                    <UBadge icon="i-lucide-graduation-cap"
+                        class="font-bold rounded-full cursor-pointer h-10 gap-2 hover:scale-105 transition-transform">
+                        Academic
+                    </UBadge>
+
+                    <UBadge icon="i-lucide-code"
+                        class="font-bold rounded-full cursor-pointer h-10 gap-2 hover:scale-105 transition-transform">
+                        Professional
+                    </UBadge>
+
+                    <UBadge icon="i-lucide-hand-metal"
+                        class="font-bold rounded-full cursor-pointer h-10 gap-2 hover:scale-105 transition-transform">
+                        Hobbies
+                    </UBadge>
                 </div>
             </UPageAside>
         </template>
@@ -76,18 +92,33 @@ const locale = ref('en')
 
         <template #right>
             <UPageAside>
-                <span>you can reach me at:</span>
+                <div class="flex flex-col size-full gap-3">
+                    <span class="text-secondary">$ whoami</span>
+                    <p class="text-sm/snug">Desenvolvedor Full-Stack com ampla experiência em tecnologias como React,
+                        Vue, Typescript,
+                        Svelte, React Native, Tailwind, SASS, além de familiaridade com ambientes Linux, controle de
+                        versão com
+                        Git e fluência completa na língua inglesa.</p>
+                </div>
+
+                <USeparator size="md" class="py-6" label="you can reach me at:" />
 
                 <div class="flex flex-col size-full gap-3">
-                    <UButton class="w-full h-20 bg-instagram">
-                        Instagram
+                    <UButton icon="i-lucide-linkedin"
+                        class="w-full h-20 flex justify-center items-center hover:scale-105 transition-transform"
+                        color="secondary">
+                        Linkedin
                     </UButton>
 
-                    <UButton class="w-full h-20">
-                        Instagram
+                    <UButton icon="i-lucide-github"
+                        class="w-full h-20 flex justify-center items-center hover:scale-105 transition-transform"
+                        color="secondary">
+                        GitHub
                     </UButton>
 
-                    <UButton class="w-full h-20">
+                    <UButton icon="i-lucide-instagram"
+                        class="w-full h-20 flex justify-center items-center hover:scale-105 transition-transform"
+                        color="secondary">
                         Instagram
                     </UButton>
                 </div>
