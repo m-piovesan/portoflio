@@ -108,7 +108,7 @@ function toggleBadgeFilter(badgeLabel: string) {
                     icon="i-simple-icons-github" aria-label="GitHub" />
             </UTooltip>
 
-            <ULocaleSelect :model-value="locale" :locales="Object.values(locales)"
+            <ULocaleSelect :model-value="locale" :locales="locales as any"
                 @update:model-value="setLocale($event as typeof locale)" class="w-48" />
         </template>
     </UHeader>
@@ -119,15 +119,6 @@ function toggleBadgeFilter(badgeLabel: string) {
                 <div class="flex flex-col size-full justify-center gap-3 ml-4 mb-8">
                     <span class="text-secondary">order by time:</span>
 
-                    <UBadge icon="i-lucide-calendar-arrow-up"
-                        :color="selectedFilter === 'asc' ? 'warning' : 'secondary'" variant="subtle"
-                        class="font-bold rounded-full cursor-pointer h-8 gap-2 hover:scale-105 transition-transform"
-                        :class="{
-                            'ring-2 ring-warning': selectedFilter === 'asc'
-                        }" @click="selectedFilter = 'asc'">
-                        Ascending
-                    </UBadge>
-
                     <UBadge icon="i-lucide-calendar-arrow-down"
                         :color="selectedFilter === 'desc' ? 'warning' : 'secondary'" variant="subtle"
                         class="font-bold rounded-full cursor-pointer h-8 gap-2 hover:scale-105 transition-transform"
@@ -135,6 +126,15 @@ function toggleBadgeFilter(badgeLabel: string) {
                             'ring-2 ring-warning': selectedFilter === 'desc'
                         }" @click="selectedFilter = 'desc'">
                         Descending
+                    </UBadge>
+
+                    <UBadge icon="i-lucide-calendar-arrow-up"
+                        :color="selectedFilter === 'asc' ? 'warning' : 'secondary'" variant="subtle"
+                        class="font-bold rounded-full cursor-pointer h-8 gap-2 hover:scale-105 transition-transform"
+                        :class="{
+                            'ring-2 ring-warning': selectedFilter === 'asc'
+                        }" @click="selectedFilter = 'asc'">
+                        Ascending
                     </UBadge>
                 </div>
 
@@ -179,7 +179,7 @@ function toggleBadgeFilter(badgeLabel: string) {
                     <p class="text-sm/snug">{{ $t('whoami') }}</p>
                 </div>
 
-                <USeparator size="md" class="py-6" label="you can reach me at:" />
+                <USeparator size="md" class="py-6" :label="$t('reachme')" />
 
                 <div class="flex flex-col size-full gap-3">
                     <UButton icon="i-lucide-linkedin"
