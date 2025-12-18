@@ -67,6 +67,7 @@ const badges: Badge[] = [
 const locale = ref('en')
 
 const selectedBadges = ref<string[]>([])
+const selectedFilter = ref<'asc' | 'desc'>('desc')
 
 function toggleBadgeFilter(badgeLabel: string) {
     if (selectedBadges.value.includes(badgeLabel)) {
@@ -75,11 +76,24 @@ function toggleBadgeFilter(badgeLabel: string) {
 }
 
 const filteredTimeline = computed(() => {
-    if (!selectedBadges.value.length) return timeline.toSorted((a, b) => a.date.getTime() - b.date.getTime())
+    if (selectedFilter.value === 'asc') {
+        if (selectedBadges.value.length) {
+            return timeline
+                .filter(post => selectedBadges.value.includes(post.badge))
+                .toSorted((a, b) => a.date.getTime() - b.date.getTime())
+        }
+
+        return timeline.toSorted((a, b) => a.date.getTime() - b.date.getTime())
+    }
+
+    if (selectedBadges.value.length) {
+        return timeline
+            .filter(post => selectedBadges.value.includes(post.badge))
+            .toSorted((a, b) => b.date.getTime() - a.date.getTime())
+    }
 
     return timeline
-        .filter(post => selectedBadges.value.includes(post.badge))
-        .toSorted((a, b) => a.date.getTime() - b.date.getTime())
+        .toSorted((a, b) => b.date.getTime() - a.date.getTime())
 })
 
 </script>
@@ -103,11 +117,33 @@ const filteredTimeline = computed(() => {
     <UPage>
         <template #left>
             <UPageAside>
+                <div class="flex flex-col size-full justify-center gap-3 ml-4 mb-8">
+                    <span class="text-secondary">order by time:</span>
+
+                    <UBadge icon="i-lucide-calendar-arrow-up"
+                        :color="selectedFilter === 'asc' ? 'warning' : 'secondary'" variant="subtle"
+                        class="font-bold rounded-full cursor-pointer h-8 gap-2 hover:scale-105 transition-transform"
+                        :class="{
+                            'ring-2 ring-warning': selectedFilter === 'asc'
+                        }" @click="selectedFilter = 'asc'">
+                        Ascending
+                    </UBadge>
+
+                    <UBadge icon="i-lucide-calendar-arrow-down"
+                        :color="selectedFilter === 'desc' ? 'warning' : 'secondary'" variant="subtle"
+                        class="font-bold rounded-full cursor-pointer h-8 gap-2 hover:scale-105 transition-transform"
+                        :class="{
+                            'ring-2 ring-warning': selectedFilter === 'desc'
+                        }" @click="selectedFilter = 'desc'">
+                        Descending
+                    </UBadge>
+                </div>
+
                 <div class="flex flex-col size-full justify-center gap-3 ml-4">
                     <span class="text-secondary">filter by:</span>
 
-                    <UBadge v-for="badge in badges" :key="badge.label" :icon="badge.icon" color="warning"
-                        variant="subtle"
+                    <UBadge v-for="badge in badges" :key="badge.label" :icon="badge.icon"
+                        :color="selectedBadges.includes(badge.label) ? 'warning' : 'secondary'" variant="subtle"
                         class="font-bold rounded-full cursor-pointer h-8 gap-2 hover:scale-105 transition-transform"
                         :class="{
                             'ring-2 ring-warning': selectedBadges.includes(badge.label)
