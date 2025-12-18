@@ -120,7 +120,7 @@ const filteredTimeline = computed(() => {
         </template>
 
         <UPageBody>
-            <UChangelogVersions class="pt-8">
+            <UChangelogVersions v-if="filteredTimeline.length" class="pt-8">
                 <UChangelogVersion v-for="post in filteredTimeline" :key="post.title" v-bind="post" :badge="{
                     icon: badges.find(b => b.label === post.badge)?.icon, color: 'primary', variant: 'subtle'
                 }" class="flex items-start cursor-default" :ui="{
@@ -129,6 +129,12 @@ const filteredTimeline = computed(() => {
                 }">
                 </UChangelogVersion>
             </UChangelogVersions>
+
+            <div v-else class="flex flex-col size-full justify-center items-center gap-4 py-20">
+                <p class="text-center text-sm/snug text-secondary">No posts found with the selected filters, but take
+                    this cool pikachu instead :D</p>
+                <NuxtImg src="/pikachu.gif" sizes="900px" />
+            </div>
         </UPageBody>
 
         <template #right>
