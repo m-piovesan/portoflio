@@ -24,9 +24,9 @@ const timeline: Post[] = [
         badge: 'Personal',
     },
     {
-        title: 'Nuxt 3.16',
-        description: 'Nuxt 3.16 is out - packed with features and performance improvements!',
-        date: new Date('2024-03-07T00:00:00.000Z'),
+        title: $t('mindtechTitle'),
+        description: $t('mindtechDesc'),
+        date: new Date('2024-09-10T00:00:00.000Z'),
         image: 'https://nuxt.com/assets/blog/v3.16.png',
         badge: 'Professional',
     },
@@ -97,21 +97,22 @@ function toggleBadgeFilter(badgeLabel: string) {
 </script>
 
 <template>
-    <UHeader class="h-[20vh] relative" title="Matheus Piovesan">
+    <div class="h-[20vh] flex justify-around items-center gap-4 border-b border-amber-50/10">
+        <div class="flex flex-col gap-1">
+            <span class="text-blue-400 text-xl">Matheus Piovesan's Journey</span>
+            <span class="text-sm">Software Engeneer / Developer</span>
+        </div>
+
         <UAvatar src="https://github.com/m-piovesan.png" class="size-40 -mb-20" />
 
-        <template #right>
+        <div class="md:flex gap-4 hidden">
             <UColorModeButton />
-
-            <UTooltip text="Check my GitHub">
-                <UButton color="neutral" variant="ghost" to="https://github.com/m-piovesan" target="_blank"
-                    icon="i-simple-icons-github" aria-label="GitHub" />
-            </UTooltip>
 
             <ULocaleSelect :model-value="locale" :locales="locales as any"
                 @update:model-value="setLocale($event as typeof locale)" class="w-48" />
-        </template>
-    </UHeader>
+
+        </div>
+    </div>
 
     <UPage>
         <template #left>
@@ -139,7 +140,7 @@ function toggleBadgeFilter(badgeLabel: string) {
                 </div>
 
                 <div class="flex flex-col size-full justify-center gap-3 ml-4">
-                    <span class="text-secondary">filter by:</span>
+                    <span class="text-secondary">filter by category:</span>
 
                     <UBadge v-for="badge in badges" :key="badge.label" :icon="badge.icon"
                         :color="selectedBadges.includes(badge.label) ? 'warning' : 'secondary'" variant="subtle"
@@ -155,12 +156,12 @@ function toggleBadgeFilter(badgeLabel: string) {
         </template>
 
         <UPageBody>
-            <UChangelogVersions v-if="filteredTimeline.length" class="pt-8">
+            <UChangelogVersions v-if="filteredTimeline.length" class="pt-8 whitespace-pre-line">
                 <UChangelogVersion v-for="post in filteredTimeline" :key="post.title" v-bind="post" :badge="{
                     icon: badges.find(b => b.label === post.badge)?.icon, color: 'primary', variant: 'subtle'
                 }" class="flex items-start cursor-default" :ui="{
                     indicator: 'sticky top-(--ui-header-height)',
-                    container: 'ml-20',
+                    container: 'mx-4 lg:ml-20 lg:mr-0',
                 }">
                 </UChangelogVersion>
             </UChangelogVersions>
