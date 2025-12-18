@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { en, es, pt_br } from '@nuxt/ui/locale'
 import type { Badge, Post } from '~/types';
 
 const timeline: Post[] = [
@@ -64,16 +63,10 @@ const badges: Badge[] = [
     }
 ]
 
-const locale = ref('en')
+const { locales, setLocale, locale } = useI18n()
 
 const selectedBadges = ref<string[]>([])
 const selectedFilter = ref<'asc' | 'desc'>('desc')
-
-function toggleBadgeFilter(badgeLabel: string) {
-    if (selectedBadges.value.includes(badgeLabel)) {
-        selectedBadges.value = selectedBadges.value.filter(label => label !== badgeLabel)
-    } else selectedBadges.value.push(badgeLabel)
-}
 
 const filteredTimeline = computed(() => {
     if (selectedFilter.value === 'asc') {
@@ -96,6 +89,11 @@ const filteredTimeline = computed(() => {
         .toSorted((a, b) => b.date.getTime() - a.date.getTime())
 })
 
+function toggleBadgeFilter(badgeLabel: string) {
+    if (selectedBadges.value.includes(badgeLabel)) {
+        selectedBadges.value = selectedBadges.value.filter(label => label !== badgeLabel)
+    } else selectedBadges.value.push(badgeLabel)
+}
 </script>
 
 <template>
@@ -110,7 +108,8 @@ const filteredTimeline = computed(() => {
                     icon="i-simple-icons-github" aria-label="GitHub" />
             </UTooltip>
 
-            <ULocaleSelect v-model="locale" :locales="[en, es, pt_br]" class="w-48" />
+            <ULocaleSelect :model-value="locale" :locales="Object.values(locales)"
+                @update:model-value="setLocale($event as typeof locale)" class="w-48" />
         </template>
     </UHeader>
 
@@ -177,11 +176,7 @@ const filteredTimeline = computed(() => {
             <UPageAside>
                 <div class="flex flex-col size-full gap-3">
                     <span class="text-secondary">$ whoami</span>
-                    <p class="text-sm/snug">desenvolvedor Full-Stack com ampla experiência em tecnologias como React,
-                        Vue, Typescript,
-                        Svelte, React Native, Tailwind, SASS, além de familiaridade com ambientes Linux, controle de
-                        versão com
-                        Git e fluência completa na língua inglesa.</p>
+                    <p class="text-sm/snug">{{ $t('whoami') }}</p>
                 </div>
 
                 <USeparator size="md" class="py-6" label="you can reach me at:" />
