@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import type { DropdownMenuItem } from '@nuxt/ui';
-import type { Badge, Post } from '~/types';
+import type { Badge, Locale, Post } from '~/types';
+
+const { locales, setLocale, locale } = useI18n()
+
+const localeMap: Record<Locale, string> = {
+    'pt-br': 'pt-BR',
+    en: 'en-US',
+    es: 'es-ES',
+}
 
 const timeline: Post[] = [
     {
@@ -14,7 +22,7 @@ const timeline: Post[] = [
         title: 'Mudança para Curitiba',
         description:
             'saímos bem cedo de Videira, eu, meus pais e meu irmão, a viagem deu umas 5h no total. Videira e Curitiba ficam a uns 330km então é uma viagem consideravelmente cansativa, mas obviamente estava bem animado, a gente já tinha visto e alugado o apartamento uns tempos antes, então basicamente separei minhas roupas, computador e tals e foi isso;',
-        date: new Date('2022-06-07T00:00:00.000Z'),
+        date: new Date('2022-06-05T00:00:00.000Z'),
         badge: 'Personal',
     },
     {
@@ -30,6 +38,13 @@ const timeline: Post[] = [
         date: new Date('2024-09-10T00:00:00.000Z'),
         image: 'https://nuxt.com/assets/blog/v3.16.png',
         badge: 'Professional',
+    },
+    {
+        title: $t('ufprTitle'),
+        description: $t('ufprDesc'),
+        date: new Date('2022-06-07T00:00:00.000Z'),
+        image: 'https://nuxt.com/assets/blog/v3.16.png',
+        badge: 'Academic',
     },
     {
         title: 'Nuxt 3.15',
@@ -64,21 +79,27 @@ const badges: Badge[] = [
     }
 ]
 
-const items: DropdownMenuItem[] = [
+const selectedBadges = ref<string[]>([])
+const selectedFilter = ref<'asc' | 'desc'>('desc')
+
+const items = computed<DropdownMenuItem[]>(() => [
     {
         label: 'Most recent first',
-        icon: 'i-lucide-calendar-arrow-down'
+        icon: 'i-lucide-calendar-arrow-down',
+        color: selectedFilter.value === 'desc' ? 'warning' as const : undefined,
+        onSelect() {
+            selectedFilter.value = 'desc'
+        }
     },
     {
         label: 'Oldest first',
-        icon: 'i-lucide-calendar-arrow-up'
+        icon: 'i-lucide-calendar-arrow-up',
+        color: selectedFilter.value === 'asc' ? 'warning' as const : undefined,
+        onSelect() {
+            selectedFilter.value = 'asc'
+        }
     }
-]
-
-const { locales, setLocale, locale } = useI18n()
-
-const selectedBadges = ref<string[]>([])
-const selectedFilter = ref<'asc' | 'desc'>('desc')
+])
 
 const filteredTimeline = computed(() => {
     if (selectedFilter.value === 'asc') {
@@ -101,10 +122,32 @@ const filteredTimeline = computed(() => {
         .toSorted((a, b) => b.date.getTime() - a.date.getTime())
 })
 
+const formattedTimeline = computed(() => {
+    return filteredTimeline.value.map(post => ({
+        ...post,
+        date: formatMonthYear(post.date, locale.value)
+    }))
+})
+
 function toggleBadgeFilter(badgeLabel: string) {
     if (selectedBadges.value.includes(badgeLabel)) {
         selectedBadges.value = selectedBadges.value.filter(label => label !== badgeLabel)
     } else selectedBadges.value.push(badgeLabel)
+}
+
+function formatMonthYear(
+    date: Date | string,
+    locale: Locale
+): string {
+    const parsedDate =
+        typeof date === 'string' ? new Date(date) : date
+
+    const formatter = new Intl.DateTimeFormat(localeMap[locale], {
+        month: 'long',
+        year: 'numeric',
+    })
+
+    return formatter.format(parsedDate)
 }
 </script>
 
@@ -125,9 +168,102 @@ function toggleBadgeFilter(badgeLabel: string) {
         </div>
     </div>
 
-    <UPage>
+    <UPage class="lg:grid-cols-12!">
         <template #left>
-            <UPageAside>
+            <UPageAside class="p-0! lg:col-span-3!">
+                <div class="flex flex-col size-full gap-6 pt-6 pl-12">
+                    <div class="flex flex-row items-center justify-center size-full gap-3">
+                        <UDropdownMenu :items="items" class="cursor-pointer" :content="{
+                            side: 'bottom',
+                            sideOffset: 20
+                        }" :ui="{
+                            content: 'w-48'
+                        }">
+                            <UButton label="Order by" icon="i-lucide-arrow-down-up" color="neutral" variant="outline" />
+                        </UDropdownMenu>
+
+                        <UDropdownMenu :items="badges" class="cursor-pointer" :content="{
+                            side: 'bottom',
+                            sideOffset: 8
+                        }" :ui="{
+                            content: 'w-48'
+                        }">
+                            <UButton label="Filter by" icon="i-lucide-funnel" color="neutral" variant="outline" />
+                        </UDropdownMenu>
+                    </div>
+
+                    <div class="flex flex-col size-full gap-3">
+                        <span class="text-secondary">$ whoami</span>
+                        <p class="text-sm/snug">{{ $t('whoami') }}</p>
+                    </div>
+
+                    <USeparator size="md" :label="$t('reachme')" />
+
+                    <div class="flex flex-col size-full gap-3">
+                        <UButton icon="i-lucide-linkedin"
+                            class="w-full h-20 flex justify-center items-center hover:scale-105 transition-transform"
+                            color="secondary" to="https://www.linkedin.com/in/matheus-mpiovesan/" target="_blank">
+                            Linkedin
+                        </UButton>
+
+                        <UButton icon="i-lucide-github"
+                            class="w-full h-20 flex justify-center items-center hover:scale-105 transition-transform"
+                            color="secondary" to="https://github.com/m-piovesan" target="_blank">
+                            GitHub
+                        </UButton>
+
+                        <UButton icon="i-lucide-instagram"
+                            class="w-full h-20 flex justify-center items-center hover:scale-105 transition-transform"
+                            color="secondary" to="https://www.instagram.com/piovesann__/" target="_blank">
+                            Instagram
+                        </UButton>
+                    </div>
+                </div>
+
+            </UPageAside>
+        </template>
+
+        <UMain class="lg:col-span-9!">
+            <div class="flex flex-row items-center justify-center size-full gap-3 p-3 pt-6 xl:hidden">
+                <UDropdownMenu :items="items" :content="{
+                    side: 'bottom',
+                    sideOffset: 20
+                }" :ui="{
+                    content: 'w-48'
+                }">
+                    <UButton label="Order by" icon="i-lucide-arrow-down-up" color="neutral" variant="outline" />
+                </UDropdownMenu>
+
+                <UDropdownMenu :items="badges" :content="{
+                    side: 'bottom',
+                    sideOffset: 8
+                }" :ui="{
+                    content: 'w-48'
+                }">
+                    <UButton label="Filter by" icon="i-lucide-funnel" color="neutral" variant="outline" />
+                </UDropdownMenu>
+            </div>
+
+            <UChangelogVersions v-if="filteredTimeline.length" class="pt-8 whitespace-pre-line w-full">
+                <UChangelogVersion v-for="post in filteredTimeline" v-bind="post" :badge="{
+                    icon: badges.find(b => b.label === post.badge)?.icon, color: 'primary', variant: 'subtle'
+                }" class="flex items-start cursor-default" :ui="{
+                    indicator: 'sticky',
+                    container: 'mx-4 max-w-full lg:max-w-[50vw] lg:ml-20 lg:mr-0',
+                }" />
+            </UChangelogVersions>
+
+            <div v-else class="flex flex-col size-full justify-center items-center gap-4 py-20">
+                <p class="text-center text-sm/snug text-secondary">No posts found with the selected filters, but take
+                    this cool
+                    pikachu instead :D</p>
+                <NuxtImg src="/pikachu.gif" sizes="900px" />
+            </div>
+        </UMain>
+    </UPage>
+
+
+    <!-- <UPageAside>
                 <div class="flex flex-col size-full justify-center gap-3 ml-4 mb-8">
                     <span class="text-secondary">order by time:</span>
 
@@ -163,79 +299,5 @@ function toggleBadgeFilter(badgeLabel: string) {
                     </UBadge>
 
                 </div>
-            </UPageAside>
-        </template>
-
-        <UPageBody>
-            <div class="flex flex-row items-center justify-center size-full gap-3 p-3 pt-6 lg:hidden">
-                <UDropdownMenu :items="items" :content="{
-                    align: 'start',
-                    side: 'bottom',
-                    sideOffset: 8
-                }" :ui="{
-                    content: 'w-48'
-                }">
-                    <UButton label="Order by" icon="i-lucide-arrow-down-up" color="neutral" variant="outline" />
-                </UDropdownMenu>
-
-                <UDropdownMenu :items="badges" :content="{
-                    align: 'start',
-                    side: 'bottom',
-                    sideOffset: 8
-                }" :ui="{
-                    content: 'w-48'
-                }">
-                    <UButton label="Filter by" icon="i-lucide-funnel" color="neutral" variant="outline" />
-                </UDropdownMenu>
-            </div>
-
-            <UChangelogVersions v-if="filteredTimeline.length" class="pt-8 whitespace-pre-line">
-                <UChangelogVersion v-for="post in filteredTimeline" :key="post.title" v-bind="post" :badge="{
-                    icon: badges.find(b => b.label === post.badge)?.icon, color: 'primary', variant: 'subtle'
-                }" class="flex items-start cursor-default" :ui="{
-                    indicator: 'sticky top-(--ui-header-height)',
-                    container: 'mx-4 lg:ml-20 lg:mr-0',
-                }">
-                </UChangelogVersion>
-            </UChangelogVersions>
-
-            <div v-else class="flex flex-col size-full justify-center items-center gap-4 py-20">
-                <p class="text-center text-sm/snug text-secondary">No posts found with the selected filters, but take
-                    this cool pikachu instead :D</p>
-                <NuxtImg src="/pikachu.gif" sizes="900px" />
-            </div>
-        </UPageBody>
-
-        <template #right>
-            <UPageAside>
-                <div class="flex flex-col size-full gap-3">
-                    <span class="text-secondary">$ whoami</span>
-                    <p class="text-sm/snug">{{ $t('whoami') }}</p>
-                </div>
-
-                <USeparator size="md" class="py-6" :label="$t('reachme')" />
-
-                <div class="flex flex-col size-full gap-3">
-                    <UButton icon="i-lucide-linkedin"
-                        class="w-full h-20 flex justify-center items-center hover:scale-105 transition-transform"
-                        color="secondary" to="https://www.linkedin.com/in/matheus-mpiovesan/" target="_blank">
-                        Linkedin
-                    </UButton>
-
-                    <UButton icon="i-lucide-github"
-                        class="w-full h-20 flex justify-center items-center hover:scale-105 transition-transform"
-                        color="secondary" to="https://github.com/m-piovesan" target="_blank">
-                        GitHub
-                    </UButton>
-
-                    <UButton icon="i-lucide-instagram"
-                        class="w-full h-20 flex justify-center items-center hover:scale-105 transition-transform"
-                        color="secondary" to="https://www.instagram.com/piovesann__/" target="_blank">
-                        Instagram
-                    </UButton>
-                </div>
-            </UPageAside>
-        </template>
-    </UPage>
-
+            </UPageAside> -->
 </template>

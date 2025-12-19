@@ -14,3 +14,5 @@ export type Post = {
     to?: string
     target?: string
 }
+
+export type Locale = 'pt-br' | 'en' | 'es'
