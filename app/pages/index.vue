@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { DropdownMenuItem } from '@nuxt/ui';
 import type { Badge, Post } from '~/types';
 
 const timeline: Post[] = [
@@ -63,6 +64,17 @@ const badges: Badge[] = [
     }
 ]
 
+const items: DropdownMenuItem[] = [
+    {
+        label: 'Most recent first',
+        icon: 'i-lucide-calendar-arrow-down'
+    },
+    {
+        label: 'Oldest first',
+        icon: 'i-lucide-calendar-arrow-up'
+    }
+]
+
 const { locales, setLocale, locale } = useI18n()
 
 const selectedBadges = ref<string[]>([])
@@ -110,7 +122,6 @@ function toggleBadgeFilter(badgeLabel: string) {
 
             <ULocaleSelect :model-value="locale" :locales="locales as any"
                 @update:model-value="setLocale($event as typeof locale)" class="w-48" />
-
         </div>
     </div>
 
@@ -156,6 +167,28 @@ function toggleBadgeFilter(badgeLabel: string) {
         </template>
 
         <UPageBody>
+            <div class="flex flex-row items-center justify-center size-full gap-3 p-3 pt-6 lg:hidden">
+                <UDropdownMenu :items="items" :content="{
+                    align: 'start',
+                    side: 'bottom',
+                    sideOffset: 8
+                }" :ui="{
+                    content: 'w-48'
+                }">
+                    <UButton label="Order by" icon="i-lucide-arrow-down-up" color="neutral" variant="outline" />
+                </UDropdownMenu>
+
+                <UDropdownMenu :items="badges" :content="{
+                    align: 'start',
+                    side: 'bottom',
+                    sideOffset: 8
+                }" :ui="{
+                    content: 'w-48'
+                }">
+                    <UButton label="Filter by" icon="i-lucide-funnel" color="neutral" variant="outline" />
+                </UDropdownMenu>
+            </div>
+
             <UChangelogVersions v-if="filteredTimeline.length" class="pt-8 whitespace-pre-line">
                 <UChangelogVersion v-for="post in filteredTimeline" :key="post.title" v-bind="post" :badge="{
                     icon: badges.find(b => b.label === post.badge)?.icon, color: 'primary', variant: 'subtle'
