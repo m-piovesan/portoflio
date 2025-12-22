@@ -12,10 +12,9 @@ const localeMap: Record<Locale, string> = {
 
 const timeline: Post[] = [
     {
-        title: 'Nasci :)',
-        description:
-            'nascido e criado em Videira-SC (Brasil), tô deixando informado aí caso algum de vocês queira me mandar um presente no meu anivesário kkkkkkk entra em contato comigo em alguma das redes que deixei aí que eu passo meu pix;',
-        date: new Date('2003-11-12T00:00:00.000Z'),
+        title: $t('bdayTitle'),
+        description: $t('bdayDesc'),
+        date: new Date('2003-11-12T10:00:00.000Z'),
         badge: 'Personal',
     },
     {
@@ -26,9 +25,8 @@ const timeline: Post[] = [
         badge: 'Personal',
     },
     {
-        title: 'IFC',
-        description:
-            'acho relevante compartilhar um pouco sobre meus anos de EM, estudei integralmente no IFC (Instituto Federal Catarinense) Câmpus Videira, uma escola técnica federal, que foi onde tive meus primeiros contatos mais profundos com a computação, visto que eu cursei o técnico em informática. Foi uma época daora demais, infelizmente peguei o período da pandemia mas o terceirão principalmente foi legal por demais. Um salve pro professor Manfe que ensinou html e css básico pra gente, olha só onde isso me levou hoje em dia kkkkkk;',
+        title: $t('ifcTitle'),
+        description: $t('ifcDesc'),
         date: new Date('2019-02-27T00:00:00.000Z'),
         badge: 'Personal',
     },
@@ -47,6 +45,24 @@ const timeline: Post[] = [
         badge: 'Academic',
     },
     {
+        title: $t('icsTitle'),
+        description: $t('icsDesc'),
+        date: new Date('2023-03-02T00:00:00.000Z'),
+        badge: 'Academic',
+    },
+    {
+        title: $t('bellosoftTitle'),
+        description: $t('bellosoftDesc'),
+        date: new Date('2024-04-02T00:00:00.000Z'),
+        badge: 'Professional',
+    },
+    {
+        title: $t('unitedTitle'),
+        description: $t('unitedDesc'),
+        date: new Date('2021-04-17T00:00:00.000Z'),
+        badge: 'Professional',
+    },
+    {
         title: 'Nuxt 3.15',
         description: 'Nuxt 3.15 is out - with Vite 6, better HMR and faster performance!',
         date: new Date('2024-12-24T00:00:00.000Z'),
@@ -56,30 +72,15 @@ const timeline: Post[] = [
     }
 ]
 
-const badges: Badge[] = [
-    {
-        label: 'Personal',
-        icon: 'i-lucide-user-round',
-    },
-    {
-        label: 'Academic',
-        icon: 'i-lucide-graduation-cap',
-    },
-    {
-        label: 'Professional',
-        icon: 'i-lucide-code',
-    },
-    {
-        label: 'Hobbies',
-        icon: 'i-lucide-hand-metal',
-    },
-    {
-        label: 'Others',
-        icon: 'i-lucide-box',
-    }
+const badgeDefinitions: Badge[] = [
+    { label: 'Personal', icon: 'i-lucide-user-round' },
+    { label: 'Academic', icon: 'i-lucide-graduation-cap' },
+    { label: 'Professional', icon: 'i-lucide-code' },
+    { label: 'Hobbies', icon: 'i-lucide-hand-metal' },
+    { label: 'Others', icon: 'i-lucide-box' },
 ]
 
-const selectedBadges = ref<string[]>([])
+const selectedBadges = ref<Badge['label'][]>([])
 const selectedFilter = ref<'asc' | 'desc'>('desc')
 
 const items = computed<DropdownMenuItem[]>(() => [
@@ -100,6 +101,20 @@ const items = computed<DropdownMenuItem[]>(() => [
         }
     }
 ])
+
+const badges = computed<DropdownMenuItem[]>(() =>
+    badgeDefinitions.map(badge => ({
+        label: badge.label,
+        icon: badge.icon,
+        type: 'checkbox' as const,
+        color: isBadgeSelected(badge.label as Badge['label']) ? 'warning' : 'neutral',
+        checked: isBadgeSelected(badge.label as Badge['label']),
+        onSelect(e) {
+            e.preventDefault()
+            toggleBadgeFilter(badge.label as Badge['label'])
+        },
+    }))
+)
 
 const filteredTimeline = computed(() => {
     if (selectedFilter.value === 'asc') {
@@ -129,10 +144,14 @@ const formattedTimeline = computed(() => {
     }))
 })
 
-function toggleBadgeFilter(badgeLabel: string) {
-    if (selectedBadges.value.includes(badgeLabel)) {
+function toggleBadgeFilter(badgeLabel: Badge['label']) {
+    if (isBadgeSelected(badgeLabel)) {
         selectedBadges.value = selectedBadges.value.filter(label => label !== badgeLabel)
     } else selectedBadges.value.push(badgeLabel)
+}
+
+function isBadgeSelected(badgeLabel: Badge['label']) {
+    return selectedBadges.value.includes(badgeLabel)
 }
 
 function formatMonthYear(
@@ -170,7 +189,7 @@ function formatMonthYear(
 
     <UPage class="lg:grid-cols-12!">
         <template #left>
-            <UPageAside class="p-0! lg:col-span-3!">
+            <UPageAside class="p-0! pr-2! lg:col-span-3!">
                 <div class="flex flex-col size-full gap-6 pt-6 pl-12">
                     <div class="flex flex-row items-center justify-center size-full gap-3">
                         <UDropdownMenu :items="items" class="cursor-pointer" :content="{
@@ -246,9 +265,10 @@ function formatMonthYear(
 
             <UChangelogVersions v-if="filteredTimeline.length" class="pt-8 whitespace-pre-line w-full">
                 <UChangelogVersion v-for="post in filteredTimeline" v-bind="post" :badge="{
-                    icon: badges.find(b => b.label === post.badge)?.icon, color: 'primary', variant: 'subtle'
+                    icon: badges.find(b => b.label === post.badge)?.icon, color: 'warning', variant: 'subtle'
                 }" class="flex items-start cursor-default" :ui="{
                     indicator: 'sticky',
+                    dotInner: 'bg-warning',
                     container: 'mx-4 max-w-full lg:max-w-[50vw] lg:ml-20 lg:mr-0',
                 }" />
             </UChangelogVersions>
@@ -261,43 +281,4 @@ function formatMonthYear(
             </div>
         </UMain>
     </UPage>
-
-
-    <!-- <UPageAside>
-                <div class="flex flex-col size-full justify-center gap-3 ml-4 mb-8">
-                    <span class="text-secondary">order by time:</span>
-
-                    <UBadge icon="i-lucide-calendar-arrow-down"
-                        :color="selectedFilter === 'desc' ? 'warning' : 'secondary'" variant="subtle"
-                        class="font-bold rounded-full cursor-pointer h-8 gap-2 hover:scale-105 transition-transform"
-                        :class="{
-                            'ring-2 ring-warning': selectedFilter === 'desc'
-                        }" @click="selectedFilter = 'desc'">
-                        Descending
-                    </UBadge>
-
-                    <UBadge icon="i-lucide-calendar-arrow-up"
-                        :color="selectedFilter === 'asc' ? 'warning' : 'secondary'" variant="subtle"
-                        class="font-bold rounded-full cursor-pointer h-8 gap-2 hover:scale-105 transition-transform"
-                        :class="{
-                            'ring-2 ring-warning': selectedFilter === 'asc'
-                        }" @click="selectedFilter = 'asc'">
-                        Ascending
-                    </UBadge>
-                </div>
-
-                <div class="flex flex-col size-full justify-center gap-3 ml-4">
-                    <span class="text-secondary">filter by category:</span>
-
-                    <UBadge v-for="badge in badges" :key="badge.label" :icon="badge.icon"
-                        :color="selectedBadges.includes(badge.label) ? 'warning' : 'secondary'" variant="subtle"
-                        class="font-bold rounded-full cursor-pointer h-8 gap-2 hover:scale-105 transition-transform"
-                        :class="{
-                            'ring-2 ring-warning': selectedBadges.includes(badge.label)
-                        }" @click="toggleBadgeFilter(badge.label)">
-                        {{ badge.label }}
-                    </UBadge>
-
-                </div>
-            </UPageAside> -->
 </template>
