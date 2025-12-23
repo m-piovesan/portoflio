@@ -34,8 +34,10 @@ const timeline: Post[] = [
         title: $t('mindtechTitle'),
         description: $t('mindtechDesc'),
         date: new Date('2024-09-10T00:00:00.000Z'),
-        image: 'https://nuxt.com/assets/blog/v3.16.png',
+        image: "/mind.jpeg",
+        to: 'https://www.linkedin.com/posts/matheus-mpiovesan_pt-br-boa-noite-rede-fecho-esta-activity-7385090039875186688-cWSL?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADUVanIBYZwx8c79yb7EwwwpYC2MlrxXFk8',
         badge: 'Professional',
+        target: "_blank"
     },
     {
         title: $t('ufprTitle'),
@@ -62,14 +64,6 @@ const timeline: Post[] = [
         date: new Date('2021-04-17T00:00:00.000Z'),
         badge: 'Professional',
     },
-    {
-        title: 'Nuxt 3.15',
-        description: 'Nuxt 3.15 is out - with Vite 6, better HMR and faster performance!',
-        date: new Date('2024-12-24T00:00:00.000Z'),
-        image: 'https://nuxt.com/assets/blog/v3.15.png',
-        badge: 'Academic',
-        to: 'https://nuxt.com/blog/v3-15',
-    }
 ]
 
 const badgeDefinitions: Badge[] = [
@@ -82,6 +76,7 @@ const badgeDefinitions: Badge[] = [
 
 const selectedBadges = ref<Badge['label'][]>([])
 const selectedFilter = ref<'asc' | 'desc'>('desc')
+const colorMode = useColorMode()
 
 const items = computed<DropdownMenuItem[]>(() => [
     {
@@ -171,23 +166,25 @@ function formatMonthYear(
 </script>
 
 <template>
-    <div class="h-[20vh] flex justify-around items-center gap-4 border-b border-amber-50/10">
+    <div
+        class="h-[20vh] bg-indigo-400 dark:bg-gray-950 flex justify-around items-center gap-4 dark:border-b dark:border-amber-50/10">
         <div class="flex flex-col gap-1">
-            <span class="text-blue-400 text-xl">Matheus Piovesan's Journey</span>
-            <span class="text-sm">Software Engeneer / Developer</span>
+            <span class="text-indigo-100 dark:text-blue-400 text-xl">{{ $t('headerTitle') }}</span>
+            <span class="text-sm text-indigo-900 dark:text-indigo-100">{{ $t('headerDesc') }}</span>
         </div>
 
-        <UAvatar src="https://github.com/m-piovesan.png" class="size-40 -mb-20" />
+        <UAvatar :src="colorMode.value === 'dark' ? 'https://github.com/m-piovesan.png' : '/flash.webp'"
+            class="size-40 -mb-20" />
 
         <div class="md:flex gap-4 hidden">
-            <UColorModeButton />
+            <UColorModeButton class="cursor-pointer" />
 
-            <ULocaleSelect :model-value="locale" :locales="locales as any"
-                @update:model-value="setLocale($event as typeof locale)" class="w-48" />
+            <ULocaleSelect :model-value="locale" class="w-48 cursor-pointer bg-transparent" :locales="locales as any"
+                @update:model-value="setLocale($event as typeof locale)" />
         </div>
     </div>
 
-    <UPage class="lg:grid-cols-12!">
+    <UPage class="lg:grid-cols-12! bg-indigo-100 dark:bg-gray-950">
         <template #left>
             <UPageAside class="p-0! pr-2! lg:col-span-3!">
                 <div class="flex flex-col size-full gap-6 pt-6 pl-12">
@@ -198,7 +195,8 @@ function formatMonthYear(
                         }" :ui="{
                             content: 'w-48'
                         }">
-                            <UButton label="Order by" icon="i-lucide-arrow-down-up" color="neutral" variant="outline" />
+                            <UButton :label="$t('orderBy')" icon="i-lucide-arrow-down-up" color="neutral"
+                                variant="outline" />
                         </UDropdownMenu>
 
                         <UDropdownMenu :items="badges" class="cursor-pointer" :content="{
@@ -207,33 +205,34 @@ function formatMonthYear(
                         }" :ui="{
                             content: 'w-48'
                         }">
-                            <UButton label="Filter by" icon="i-lucide-funnel" color="neutral" variant="outline" />
+                            <UButton :label="$t('filterBy')" icon="i-lucide-funnel" color="neutral" variant="outline" />
                         </UDropdownMenu>
                     </div>
 
                     <div class="flex flex-col size-full gap-3">
-                        <span class="text-secondary">$ whoami</span>
+                        <span class="text-indigo-900 dark:text-secondary">$ whoami</span>
                         <p class="text-sm/snug">{{ $t('whoami') }}</p>
                     </div>
 
-                    <USeparator size="md" :label="$t('reachme')" />
+                    <USeparator :color="colorMode.value === 'dark' ? 'neutral' : 'primary'" size="sm"
+                        :label="$t('reachme')" />
 
                     <div class="flex flex-col size-full gap-3">
                         <UButton icon="i-lucide-linkedin"
-                            class="w-full h-20 flex justify-center items-center hover:scale-105 transition-transform"
-                            color="secondary" to="https://www.linkedin.com/in/matheus-mpiovesan/" target="_blank">
+                            class="w-full h-20 flex justify-center items-center hover:scale-105 light:hover:bg-indigo-900 transition-transform bg-indigo-400 dark:bg-secondary text-indigo-900 light:hover:text-indigo-100"
+                            to="https://www.linkedin.com/in/matheus-mpiovesan/" target="_blank">
                             Linkedin
                         </UButton>
 
                         <UButton icon="i-lucide-github"
-                            class="w-full h-20 flex justify-center items-center hover:scale-105 transition-transform"
-                            color="secondary" to="https://github.com/m-piovesan" target="_blank">
+                            class="w-full h-20 flex justify-center items-center hover:scale-105 light:hover:bg-indigo-900 bg-indigo-400 dark:bg-secondary transition-transform text-indigo-900 light:hover:text-indigo-100"
+                            to="https://github.com/m-piovesan" target="_blank">
                             GitHub
                         </UButton>
 
                         <UButton icon="i-lucide-instagram"
-                            class="w-full h-20 flex justify-center items-center hover:scale-105 transition-transform"
-                            color="secondary" to="https://www.instagram.com/piovesann__/" target="_blank">
+                            class="w-full h-20 flex justify-center items-center hover:scale-105 light:hover:bg-indigo-900 transition-transform bg-indigo-400 dark:bg-secondary text-indigo-900 light:hover:text-indigo-100"
+                            to="https://www.instagram.com/piovesann__/" target="_blank">
                             Instagram
                         </UButton>
                     </div>
@@ -265,10 +264,9 @@ function formatMonthYear(
 
             <UChangelogVersions v-if="filteredTimeline.length" class="pt-8 whitespace-pre-line w-full">
                 <UChangelogVersion v-for="post in filteredTimeline" v-bind="post" :badge="{
-                    icon: badges.find(b => b.label === post.badge)?.icon, color: 'warning', variant: 'subtle'
+                    icon: badges.find(b => b.label === post.badge)?.icon, color: 'primary', variant: 'subtle'
                 }" class="flex items-start cursor-default" :ui="{
                     indicator: 'sticky',
-                    dotInner: 'bg-warning',
                     container: 'mx-4 max-w-full lg:max-w-[50vw] lg:ml-20 lg:mr-0',
                 }" />
             </UChangelogVersions>

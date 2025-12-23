@@ -3,6 +3,7 @@
 
 @theme static {
   --font-sans: 'Public Sans', sans-serif;
+  --spacing: 0.25rem;
 }
 
 @layer base {
@@ -10,10 +11,6 @@
   *::before,
   *::after {
     box-sizing: border-box;
-  }
-
-  :root {
-    --ui-header-height: --spacing(0);
   }
 
   html,

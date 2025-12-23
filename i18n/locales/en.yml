@@ -1,6 +1,6 @@
 welcome: "Welcome"
 whoami: |
-  Full-Stack developer with extensive experience in technologies such as React, Vue, Typescript, Svelte, React Native, Tailwind, SASS,
+  full-stack developer with extensive experience in technologies such as React, Vue, Typescript, Svelte, React Native, Tailwind, SASS,
   as well as familiarity with Linux environments, version control with Git, and full fluency in the English language.
 reachme: "you can reach me at:"
 mindtechTitle: "Internship at MindTech"
@@ -10,10 +10,13 @@ mindtechDesc: |
   I worked on various projects for a wide range of clients, covering everything from industrial equipment monitoring systems, tactical security and real-time tracking projects, to healthcare platforms.
 
   This diversity of projects provided me with valuable experience and allowed me to grow significantly as a developer, not to mention the exposure to many technologies, such as Next, Typescript, Svelte, React Native, among others.
+
+  for more information about this time, click at the image to check my Linkedin post about it <3
 ufprTitle: "Bachelor's Degree in Computer Science - UFPR"
 ufprDesc: |
   since I joined, I've acquired a solid foundation in computer science, covering everything from theoretical fundamentals to practical applications, not to mention the experience of studying at one of the best universities in the country, which has provided me with significant personal growth.
 headerDesc: Software Engineer \ Developer
+headerTitle: Matheus Piovesan's Journey
 bellosoftTitle: "Junior Front-End Developer - Bellosoft"
 bellosoftDesc: |
   for several months, I was part of the Bellosoft development team, where I contributed to multiple projects across different areas, significantly developing my skills and contributing with my professional experience. This was my first formal contact with the software development world, making it an extremely enriching experience.
@@ -35,3 +38,5 @@ bdayTitle: I was born :)
 bdayDesc: born and raised in Videira-SC (Brazil), just leaving this here in case any of you want to send me a birthday gift lol. Get in touch with me through any of the social networks I listed and I’ll send you my pix;
 ifcTitle: IFC
 ifcDesc: I think it’s worth sharing a bit about my high school years. I studied full-time at IFC (Instituto Federal Catarinense), Videira campus, a federal technical school where I had my first deeper contact with computer science, since I took the IT technical course. It was an awesome time; unfortunately, part of it happened during the pandemic, but especially the last year was really great. Shout-out to professor Manfe, who taught us basic HTML and CSS… look where that took me today lol;
+orderBy: Order by
+filterBy: Filter by

@@ -1,6 +1,6 @@
 welcome: "Bienvenido"
 whoami: |
-  desarrollador Full-Stack con amplia experiencia en tecnologías como React, Vue, Typescript, Svelte, React Native, Tailwind, SASS,
+  desarrollador full-stack con amplia experiencia en tecnologías como React, Vue, Typescript, Svelte, React Native, Tailwind, SASS,
   además de familiaridad con entornos Linux, control de versiones con Git y fluidez completa en el idioma inglés.
 reachme: "puedes contactarme en:"
 mindtechTitle: "Pasantía en MindTech"
@@ -10,10 +10,13 @@ mindtechDesc: |
   Trabajé en varios proyectos para una amplia gama de clientes, abarcando desde sistemas de monitoreo de equipos industriales, proyectos tácticos de seguridad y seguimiento en tiempo real, hasta plataformas de salud.
 
   Esta diversidad de proyectos me brindó una experiencia valiosa y me permitió crecer significativamente como desarrollador, sin mencionar la exposición a muchas tecnologías, como Next, Typescript, Svelte, React Native, entre otras.
+
+  para más información, clic en la imagen para ver mi publicación en LinkedIn de la época <3
 ufprTitle: "Licenciatura en Ciencias de la Computación - UFPR"
 ufprDesc: |
   desde que entré, he adquirido una base sólida en ciencias de la computación, que abarca desde los fundamentos teóricos hasta las aplicaciones prácticas, sin mencionar la experiencia de estudiar en una de las mejores universidades del país, lo que me ha brindado un crecimiento personal significativo.
 headerDesc: Inginiero de Software / Desarrollador
+headerTitle: Matheus Piovesan
 bellosoftTitle: "Desarrollador Front-End Jr - Bellosoft"
 bellosoftDesc: |
   durante algunos meses, formé parte del equipo de desarrolladores de Bellosoft, donde contribuí en diversos proyectos de distintas áreas, desarrollando significativamente mis conocimientos y aportando con mi experiencia en el ámbito profesional, ya que fue mi primer contacto formal con el mundo del desarrollo, resultando por lo tanto una experiencia extremadamente enriquecedora.
@@ -37,3 +40,5 @@ bdayDesc: nacido y criado en Videira-SC (Brasil), dejo esto anotado por si algun
 
 ifcTitle: IFC
 ifcDesc: creo que es relevante compartir un poco sobre mis años de educación secundaria. Estudié a tiempo completo en el IFC (Instituto Federal Catarinense), campus Videira, una escuela técnica federal, donde tuve mis primeros contactos más profundos con la computación, ya que cursé el técnico en informática. Fue una etapa increíble; lamentablemente coincidió en parte con la pandemia, pero especialmente el último año fue buenísimo. Un saludo al profesor Manfe, que nos enseñó HTML y CSS básico… miren hasta dónde me trajo eso hoy jajajaja;
+orderBy: Ordenar por
+filterBy: Filtrar por
