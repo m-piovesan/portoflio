@@ -222,6 +222,20 @@ function formatMonthYear(
                     <div class="flex flex-col size-full gap-3">
                         <span class="text-indigo-900 dark:text-secondary">$ whoami</span>
                         <p class="text-sm/snug">{{ $t('whoami') }}</p>
+
+                        <div class="flex flex-row w-full justify-between">
+                            <UMarquee :overlay="false">
+                                <UIcon name="i-simple-icons-typescript" class="size-10" />
+                                <UIcon name="i-simple-icons-react" class="size-10" />
+                                <UIcon name="i-simple-icons-nextdotjs" class="size-10" />
+                                <UIcon name="i-simple-icons-vuedotjs" class="size-10" />
+                                <UIcon name="i-simple-icons-nuxtdotjs" class="size-10" />
+                                <UIcon name="i-simple-icons-tailwindcss" class="size-10" />
+                                <UIcon name="i-simple-icons-git" class="size-10" />
+                                <UIcon name="i-simple-icons-sass" class="size-10" />
+                                <UIcon name="i-simple-icons-linux" class="size-10" />
+                            </UMarquee>
+                        </div>
                     </div>
 
                     <USeparator :color="colorMode.value === 'dark' ? 'neutral' : 'primary'" size="sm"
@@ -258,6 +272,20 @@ function formatMonthYear(
                     <p class="text-sm/snug">{{ $t('whoami') }}</p>
                 </div>
 
+                <div class="flex flex-row w-full justify-between">
+                    <UMarquee :overlay="false">
+                        <UIcon name="i-simple-icons-typescript" class="size-10" />
+                        <UIcon name="i-simple-icons-react" class="size-10" />
+                        <UIcon name="i-simple-icons-nextdotjs" class="size-10" />
+                        <UIcon name="i-simple-icons-vuedotjs" class="size-10" />
+                        <UIcon name="i-simple-icons-nuxtdotjs" class="size-10" />
+                        <UIcon name="i-simple-icons-tailwindcss" class="size-10" />
+                        <UIcon name="i-simple-icons-git" class="size-10" />
+                        <UIcon name="i-simple-icons-sass" class="size-10" />
+                        <UIcon name="i-simple-icons-linux" class="size-10" />
+                    </UMarquee>
+                </div>
+
                 <div class="flex flex-col xs:flex-row size-full gap-3">
                     <UButton icon="i-lucide-linkedin"
                         class="w-full h-20 flex justify-center items-center hover:scale-105 light:hover:bg-indigo-900 transition-transform bg-indigo-400 dark:bg-secondary text-indigo-900 light:hover:text-indigo-100"
@@ -285,8 +313,8 @@ function formatMonthYear(
                         side: 'bottom',
                         sideOffset: 20
                     }" :ui="{
-                        content: 'w-48'
-                    }">
+                    content: 'w-48'
+                }">
                         <UButton label="Order by" icon="i-lucide-arrow-down-up" color="neutral" variant="outline" />
                     </UDropdownMenu>
 
@@ -294,8 +322,8 @@ function formatMonthYear(
                         side: 'bottom',
                         sideOffset: 8
                     }" :ui="{
-                        content: 'w-48'
-                    }">
+                    content: 'w-48'
+                }">
                         <UButton label="Filter by" icon="i-lucide-funnel" color="neutral" variant="outline" />
                     </UDropdownMenu>
 
