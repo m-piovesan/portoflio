@@ -4,6 +4,9 @@
 @theme static {
   --font-sans: 'Public Sans', sans-serif;
   --spacing: 0.25rem;
+
+  --breakpoint-xs: 580px;
+  --breakpoint-slg: 1280px;
 }
 
 @layer base {

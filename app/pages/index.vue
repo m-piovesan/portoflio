@@ -167,14 +167,24 @@ function formatMonthYear(
 
 <template>
     <div
-        class="h-[20vh] bg-indigo-400 dark:bg-gray-950 flex justify-around items-center gap-4 dark:border-b dark:border-amber-50/10">
-        <div class="flex flex-col gap-1">
-            <span class="text-indigo-100 dark:text-blue-400 text-xl">{{ $t('headerTitle') }}</span>
-            <span class="text-sm text-indigo-900 dark:text-indigo-100">{{ $t('headerDesc') }}</span>
+        class="h-[40vh] xs:h-[20vh] bg-indigo-400 dark:bg-gray-950 flex justify-center xs:justify-around flex-col xs:flex-row items-center gap-4 dark:border-b dark:border-amber-50/10">
+        <div class="flex flex-col gap-6 text-center items-center">
+            <div class="flex flex-col gap-1 size-full">
+
+                <span class="text-indigo-100 dark:text-blue-400 text-xl">{{ $t('headerTitle') }}</span>
+                <span class="text-sm text-indigo-900 dark:text-indigo-100">{{ $t('headerDesc') }}</span>
+            </div>
+
+            <div class="flex w-60 justify-between md:hidden">
+                <UColorModeButton class="cursor-pointer" />
+
+                <ULocaleSelect :model-value="locale" class="w-48 cursor-pointer bg-transparent"
+                    :locales="locales as any" @update:model-value="setLocale($event as typeof locale)" />
+            </div>
         </div>
 
         <UAvatar :src="colorMode.value === 'dark' ? 'https://github.com/m-piovesan.png' : '/flash.webp'"
-            class="size-40 -mb-20" />
+            class="size-28 xs:size-40 -mb-40 xs:-mb-20" />
 
         <div class="md:flex gap-4 hidden">
             <UColorModeButton class="cursor-pointer" />
@@ -242,24 +252,54 @@ function formatMonthYear(
         </template>
 
         <UMain class="lg:col-span-9!">
-            <div class="flex flex-row items-center justify-center size-full gap-3 p-3 pt-6 xl:hidden">
-                <UDropdownMenu :items="items" :content="{
-                    side: 'bottom',
-                    sideOffset: 20
-                }" :ui="{
-                    content: 'w-48'
-                }">
-                    <UButton label="Order by" icon="i-lucide-arrow-down-up" color="neutral" variant="outline" />
-                </UDropdownMenu>
+            <div class="flex flex-col items-center justify-center size-full gap-6 p-3 pt-18 slg:hidden">
+                <div class="flex flex-col size-full gap-2">
+                    <span class="text-indigo-900 dark:text-secondary">$ whoami</span>
+                    <p class="text-sm/snug">{{ $t('whoami') }}</p>
+                </div>
 
-                <UDropdownMenu :items="badges" :content="{
-                    side: 'bottom',
-                    sideOffset: 8
-                }" :ui="{
-                    content: 'w-48'
-                }">
-                    <UButton label="Filter by" icon="i-lucide-funnel" color="neutral" variant="outline" />
-                </UDropdownMenu>
+                <div class="flex flex-col xs:flex-row size-full gap-3">
+                    <UButton icon="i-lucide-linkedin"
+                        class="w-full h-20 flex justify-center items-center hover:scale-105 light:hover:bg-indigo-900 transition-transform bg-indigo-400 dark:bg-secondary text-indigo-900 light:hover:text-indigo-100"
+                        to="https://www.linkedin.com/in/matheus-mpiovesan/" target="_blank">
+                        Linkedin
+                    </UButton>
+
+                    <UButton icon="i-lucide-github"
+                        class="w-full h-20 flex justify-center items-center hover:scale-105 light:hover:bg-indigo-900 bg-indigo-400 dark:bg-secondary transition-transform text-indigo-900 light:hover:text-indigo-100"
+                        to="https://github.com/m-piovesan" target="_blank">
+                        GitHub
+                    </UButton>
+
+                    <UButton icon="i-lucide-instagram"
+                        class="w-full h-20 flex justify-center items-center hover:scale-105 light:hover:bg-indigo-900 transition-transform bg-indigo-400 dark:bg-secondary text-indigo-900 light:hover:text-indigo-100"
+                        to="https://www.instagram.com/piovesann__/" target="_blank">
+                        Instagram
+                    </UButton>
+                </div>
+
+                <USeparator :color="colorMode.value === 'dark' ? 'neutral' : 'primary'" size="sm" />
+
+                <div class="flex flex-row items-center justify-center size-full gap-3">
+                    <UDropdownMenu :items="items" :content="{
+                        side: 'bottom',
+                        sideOffset: 20
+                    }" :ui="{
+                        content: 'w-48'
+                    }">
+                        <UButton label="Order by" icon="i-lucide-arrow-down-up" color="neutral" variant="outline" />
+                    </UDropdownMenu>
+
+                    <UDropdownMenu :items="badges" :content="{
+                        side: 'bottom',
+                        sideOffset: 8
+                    }" :ui="{
+                        content: 'w-48'
+                    }">
+                        <UButton label="Filter by" icon="i-lucide-funnel" color="neutral" variant="outline" />
+                    </UDropdownMenu>
+
+                </div>
             </div>
 
             <UChangelogVersions v-if="filteredTimeline.length" class="pt-8 whitespace-pre-line w-full">
