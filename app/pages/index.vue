@@ -185,10 +185,9 @@ function formatMonthYear(
 
 <template>
     <div
-        class="h-[40vh] xs:h-[20vh] bg-indigo-400 dark:bg-gray-950 flex justify-center xs:justify-around flex-col xs:flex-row items-center gap-4 dark:border-b dark:border-amber-50/10">
+        class="h-64 xs:h-50 bg-indigo-400 dark:bg-gray-950 flex justify-center xs:justify-around flex-col xs:flex-row items-center gap-4 dark:border-b dark:border-amber-50/10">
         <div class="flex flex-col gap-6 text-center items-center">
             <div class="flex flex-col gap-1 size-full">
-
                 <span class="text-indigo-100 dark:text-blue-400 text-xl">{{ $t('headerTitle') }}</span>
                 <span class="text-sm text-indigo-900 dark:text-indigo-100">{{ $t('headerDesc') }}</span>
             </div>
@@ -202,7 +201,7 @@ function formatMonthYear(
         </div>
 
         <UAvatar :src="colorMode.value === 'dark' ? 'https://github.com/m-piovesan.png' : '/flash.webp'"
-            class="size-28 xs:size-40 -mb-40 xs:-mb-20" />
+            class="size-28 xs:size-40 -mb-30 xs:-mb-20" />
 
         <div class="md:flex gap-4 hidden">
             <UColorModeButton class="cursor-pointer" />
@@ -212,7 +211,7 @@ function formatMonthYear(
         </div>
     </div>
 
-    <UPage class="lg:grid-cols-12! bg-indigo-100 dark:bg-gray-950">
+    <UPage class="lg:grid-cols-11! bg-indigo-100 dark:bg-gray-950">
         <template #left>
             <UPageAside class="p-0! pr-2! lg:col-span-3!">
                 <div class="flex flex-col size-full gap-6 pt-6 pl-12">

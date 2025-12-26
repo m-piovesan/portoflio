@@ -26,7 +26,7 @@ useHead({
                     'Styled Components',
                     'SASS',
                 ],
-                url: 'https://seusite.com',
+                url: 'https://m-piovesan.vercel.app',
                 sameAs: [
                     'https://github.com/m-piovesan',
                     'https://linkedin.com/in/matheus-mpiovesan',
