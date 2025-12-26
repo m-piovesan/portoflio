@@ -1,5 +1,6 @@
 <script setup lang="ts">
 useSeoMeta({
+    title: 'Matheus Piovesan - Dev',
     description:
         'Front-end developer especializado em React, Vue, TypeScript e design de interfaces acessíveis.',
 })
