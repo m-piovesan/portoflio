@@ -1,75 +1,59 @@
-# Nuxt Minimal Starter
+# Matheus M. Piovesan - Portfolio
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This project is my personal portfolio, designed to present my professional experience, technical knowledge, and personal journey in a casual and approachable way.
 
-## Setup
+The main concept is inspired by social media timelines, using platforms like Twitter/X as a reference. Each post represents a moment, achievement, or interest, allowing visitors to explore both my technical expertise and personal milestones through an interactive timeline experience.
 
-Make sure to install dependencies:
+# ✨ Features
+
+- Timeline-based layout inspired by social media
+- Multilingual support (i18n)
+- Filterable posts by category (badges)
+- Chronological sorting (most recent / oldest)
+- Responsive and accessible UI
+
+## 🛠️ Setup
+
+Make sure you have pnpm installed, then install the dependencies:
 
 ```bash
-# npm
-npm install
-
 # pnpm
 pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
+## 🚀 Development Server
 
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# npm
-npm run dev
-
 # pnpm
 pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+## 🧰 Technologies
 
-Build the application for production:
+This project was built with:
+- Vue (Nuxt)
+- TypeScript
+- Tailwind
+- Nuxt UI
+- i18n
+- Vercel (deployment)
 
-```bash
-# npm
-npm run build
+## 🌍 Live Version
 
-# pnpm
-pnpm build
+The portfolio is available at: https://m-piovesan.vercel.app/
 
-# yarn
-yarn build
+## 📌 Structure
 
-# bun
-bun run build
-```
+app/
+├── components/      # UI components
+├── content/         # Timeline and badge definitions
+├── pages/           # Application routes
+├── public/          # Static assets (post images, OG images)
+├── types/           # TypeScript types
+└── assets/          # CSS and styling definitions
 
-Locally preview production build:
+## 👋 Final note
 
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+If you’re a recruiter, developer, or just curious, feel free to explore the timeline and connect with me through the links available on my profile / at the website :)
