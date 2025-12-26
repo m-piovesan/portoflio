@@ -3,6 +3,7 @@ type BadgeLabel = 'Personal' | 'Academic' | 'Professional' | 'Hobbies' | 'Others
 export type Badge = {
     label: BadgeLabel
     icon: string
+    title: string
 }
 
 export type Post = {

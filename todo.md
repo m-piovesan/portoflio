@@ -1,6 +1,6 @@
-[ ] - translations (pt-bt / en / es)
-[ ] - refactor header (isn't working at mobile)
-[ ] - redesign page for smaller screens
+[X] - translations (pt-bt / en / es)
+[X] - refactor header (isn't working at mobile)
+[X] - redesign page for smaller screens
 [ ] - corrigir warnings (problema nuxt 3 gpt)
 [ ] - pensar na paleta
 [X] - mudar cor traço indicator warning
@@ -8,5 +8,5 @@
 
 responsiveness:
 [X] - timeline
-[ ] - header
-[ ] - asides (refactor for mobile)
+[X] - header
+[X] - asides (refactor for mobile)

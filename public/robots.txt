@@ -1,2 +1,6 @@
 User-Agent: *
+Allow: /
 Disallow:
+
+# Human-readable info
+# https://seusite.com/humans.txt

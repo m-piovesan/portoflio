@@ -1,0 +1,14 @@
+/* TEAM */
+Developer: Matheus Piovesan
+Role: Front-end Developer
+Location: Brazil
+
+/* SKILLS */
+Languages: TypeScript, JavaScript
+Frameworks: React, React Native, Vue, Nuxt, Next, Svelte
+Styling: Tailwind, Sass, Styled-components
+Tools: Git, Linux, Figma
+
+/* CONTACT */
+GitHub: https://github.com/m-piovesan
+LinkedIn: https://www.linkedin.com/in/matheus-mpiovesan/

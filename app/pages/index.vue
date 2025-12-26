@@ -20,9 +20,8 @@ const timeline: Post[] = [
         badge: 'Personal',
     },
     {
-        title: 'Mudança para Curitiba',
-        description:
-            'saímos bem cedo de Videira, eu, meus pais e meu irmão, a viagem deu umas 5h no total. Videira e Curitiba ficam a uns 330km então é uma viagem consideravelmente cansativa, mas obviamente estava bem animado, a gente já tinha visto e alugado o apartamento uns tempos antes, então basicamente separei minhas roupas, computador e tals e foi isso;',
+        title: $t('curitibaTitle'),
+        description: $t('curitibaDesc'),
         date: new Date('2022-06-05T00:00:00.000Z'),
         badge: 'Personal',
     },
@@ -69,11 +68,11 @@ const timeline: Post[] = [
 ]
 
 const badgeDefinitions: Badge[] = [
-    { label: 'Personal', icon: 'i-lucide-user-round' },
-    { label: 'Academic', icon: 'i-lucide-graduation-cap' },
-    { label: 'Professional', icon: 'i-lucide-code' },
-    { label: 'Hobbies', icon: 'i-lucide-hand-metal' },
-    { label: 'Others', icon: 'i-lucide-box' },
+    { label: 'Personal', title: $t('personal'), icon: 'i-lucide-user-round' },
+    { label: 'Academic', title: $t('academic'), icon: 'i-lucide-graduation-cap' },
+    { label: 'Professional', title: $t('professional'), icon: 'i-lucide-code' },
+    { label: 'Hobbies', title: $t('hobbies'), icon: 'i-lucide-hand-metal' },
+    { label: 'Others', title: $t('others'), icon: 'i-lucide-box' },
 ]
 
 const selectedBadges = ref<Badge['label'][]>([])
@@ -82,7 +81,7 @@ const colorMode = useColorMode()
 
 const items = computed<DropdownMenuItem[]>(() => [
     {
-        label: 'Most recent first',
+        label: $t('mostRecent'),
         icon: 'i-lucide-calendar-arrow-down',
         color: selectedFilter.value === 'desc' ? 'warning' as const : undefined,
         onSelect() {
@@ -90,7 +89,7 @@ const items = computed<DropdownMenuItem[]>(() => [
         }
     },
     {
-        label: 'Oldest first',
+        label: $t('oldest'),
         icon: 'i-lucide-calendar-arrow-up',
         color: selectedFilter.value === 'asc' ? 'warning' as const : undefined,
         onSelect() {
@@ -101,7 +100,8 @@ const items = computed<DropdownMenuItem[]>(() => [
 
 const badges = computed<DropdownMenuItem[]>(() =>
     badgeDefinitions.map(badge => ({
-        label: badge.label,
+        label: badge.title,
+        key: badge.label,
         icon: badge.icon,
         type: 'checkbox' as const,
         color: isBadgeSelected(badge.label as Badge['label']) ? 'warning' : 'neutral',
@@ -221,14 +221,14 @@ function formatMonthYear(
                         </UDropdownMenu>
                     </div>
 
-                    <div class="flex flex-col size-full gap-3">
-                        <span class="text-indigo-900 dark:text-secondary">$ whoami</span>
+                    <div class="flex flex-col size-full">
+                        <span class="text-indigo-900 dark:text-secondary pb-3">$ whoami</span>
                         <p class="text-sm/snug">{{ $t('whoami') }}</p>
 
                         <Carrousel />
                     </div>
 
-                    <USeparator :color="colorMode.value === 'dark' ? 'neutral' : 'primary'" size="sm"
+                    <USeparator class="-mt-6" :color="colorMode.value === 'dark' ? 'neutral' : 'primary'" size="sm"
                         :label="$t('reachme')" />
 
                     <div class="flex flex-col size-full gap-3">
@@ -293,7 +293,7 @@ function formatMonthYear(
 
             <UChangelogVersions v-if="filteredTimeline.length" class="pt-8 whitespace-pre-line w-full">
                 <UChangelogVersion v-for="post in filteredTimeline" v-bind="post" :badge="{
-                    icon: badges.find(b => b.label === post.badge)?.icon, color: 'primary', variant: 'subtle'
+                    icon: badges.find(b => b.key === post.badge)?.icon, color: 'primary', variant: 'subtle'
                 }" class="flex items-start cursor-default" :ui="{
                     indicator: 'sticky',
                     container: 'mx-4 max-w-full lg:max-w-[50vw] lg:ml-20 lg:mr-0',
