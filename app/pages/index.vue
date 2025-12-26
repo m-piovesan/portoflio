@@ -211,9 +211,9 @@ function formatMonthYear(
         </div>
     </div>
 
-    <UPage class="lg:grid-cols-11! bg-indigo-100 dark:bg-gray-950">
+    <UPage class="lg:grid-cols-11! lg:gap-4! bg-indigo-100 dark:bg-gray-950">
         <template #left>
-            <UPageAside class="p-0! lg:col-span-3!">
+            <UPageAside class="p-0! pr-2! lg:col-span-3!">
                 <div class="flex flex-col size-full gap-6 pt-6 pl-12">
                     <div class="flex flex-row items-center justify-center size-full gap-3">
                         <UDropdownMenu :items="items" class="cursor-pointer" :content="{
