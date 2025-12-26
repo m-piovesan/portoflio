@@ -178,24 +178,24 @@ function isBadgeSelected(badgeLabel: Badge['label']) {
                 <USeparator :color="colorMode.value === 'dark' ? 'neutral' : 'primary'" size="sm" />
 
                 <div class="flex flex-row items-center justify-center size-full gap-3">
-                    <UDropdownMenu :items="items" :content="{
+                    <UDropdownMenu :items="items" class="cursor-pointer" :content="{
                         side: 'bottom',
                         sideOffset: 20
                     }" :ui="{
-                        content: 'w-48'
-                    }">
-                        <UButton label="Order by" icon="i-lucide-arrow-down-up" color="neutral" variant="outline" />
+                            content: 'w-48'
+                        }">
+                        <UButton :label="$t('orderBy')" icon="i-lucide-arrow-down-up" color="neutral"
+                            variant="outline" />
                     </UDropdownMenu>
 
-                    <UDropdownMenu :items="badges" :content="{
+                    <UDropdownMenu :items="badges" class="cursor-pointer" :content="{
                         side: 'bottom',
                         sideOffset: 8
                     }" :ui="{
-                        content: 'w-48'
-                    }">
-                        <UButton label="Filter by" icon="i-lucide-funnel" color="neutral" variant="outline" />
+                            content: 'w-48'
+                        }">
+                        <UButton :label="$t('filterBy')" icon="i-lucide-funnel" color="neutral" variant="outline" />
                     </UDropdownMenu>
-
                 </div>
             </div>
 
