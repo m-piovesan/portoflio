@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { DropdownMenuItem } from '@nuxt/ui';
+import Carrousel from '~/components/carrousel.vue';
+import SocialMediaButton from '~/components/social-media-button.vue';
 import type { Badge, Locale, Post } from '~/types';
 
 const { locales, setLocale, locale } = useI18n()
@@ -223,42 +225,21 @@ function formatMonthYear(
                         <span class="text-indigo-900 dark:text-secondary">$ whoami</span>
                         <p class="text-sm/snug">{{ $t('whoami') }}</p>
 
-                        <div class="flex flex-row w-full justify-between">
-                            <UMarquee :overlay="false">
-                                <UIcon name="i-simple-icons-typescript" class="size-10" />
-                                <UIcon name="i-simple-icons-react" class="size-10" />
-                                <UIcon name="i-simple-icons-nextdotjs" class="size-10" />
-                                <UIcon name="i-simple-icons-vuedotjs" class="size-10" />
-                                <UIcon name="i-simple-icons-nuxtdotjs" class="size-10" />
-                                <UIcon name="i-simple-icons-tailwindcss" class="size-10" />
-                                <UIcon name="i-simple-icons-git" class="size-10" />
-                                <UIcon name="i-simple-icons-sass" class="size-10" />
-                                <UIcon name="i-simple-icons-linux" class="size-10" />
-                            </UMarquee>
-                        </div>
+                        <Carrousel />
                     </div>
 
                     <USeparator :color="colorMode.value === 'dark' ? 'neutral' : 'primary'" size="sm"
                         :label="$t('reachme')" />
 
                     <div class="flex flex-col size-full gap-3">
-                        <UButton icon="i-lucide-linkedin"
-                            class="w-full h-20 flex justify-center items-center hover:scale-105 light:hover:bg-indigo-900 transition-transform bg-indigo-400 dark:bg-secondary text-indigo-900 light:hover:text-indigo-100"
-                            to="https://www.linkedin.com/in/matheus-mpiovesan/" target="_blank">
-                            Linkedin
-                        </UButton>
+                        <SocialMediaButton link-to="https://www.linkedin.com/in/matheus-mpiovesan/"
+                            icon="i-lucide-linkedin" title="Linkedin" />
 
-                        <UButton icon="i-lucide-github"
-                            class="w-full h-20 flex justify-center items-center hover:scale-105 light:hover:bg-indigo-900 bg-indigo-400 dark:bg-secondary transition-transform text-indigo-900 light:hover:text-indigo-100"
-                            to="https://github.com/m-piovesan" target="_blank">
-                            GitHub
-                        </UButton>
+                        <SocialMediaButton link-to="https://github.com/m-piovesan" icon="i-lucide-github"
+                            title="GitHub" />
 
-                        <UButton icon="i-lucide-instagram"
-                            class="w-full h-20 flex justify-center items-center hover:scale-105 light:hover:bg-indigo-900 transition-transform bg-indigo-400 dark:bg-secondary text-indigo-900 light:hover:text-indigo-100"
-                            to="https://www.instagram.com/piovesann__/" target="_blank">
-                            Instagram
-                        </UButton>
+                        <SocialMediaButton link-to="https://www.instagram.com/piovesann__/" icon="i-lucide-instagram"
+                            title="Instagram" />
                     </div>
                 </div>
 
@@ -272,38 +253,18 @@ function formatMonthYear(
                     <p class="text-sm/snug">{{ $t('whoami') }}</p>
                 </div>
 
-                <div class="flex flex-row w-full justify-between">
-                    <UMarquee :overlay="false">
-                        <UIcon name="i-simple-icons-typescript" class="size-10" />
-                        <UIcon name="i-simple-icons-react" class="size-10" />
-                        <UIcon name="i-simple-icons-nextdotjs" class="size-10" />
-                        <UIcon name="i-simple-icons-vuedotjs" class="size-10" />
-                        <UIcon name="i-simple-icons-nuxtdotjs" class="size-10" />
-                        <UIcon name="i-simple-icons-tailwindcss" class="size-10" />
-                        <UIcon name="i-simple-icons-git" class="size-10" />
-                        <UIcon name="i-simple-icons-sass" class="size-10" />
-                        <UIcon name="i-simple-icons-linux" class="size-10" />
-                    </UMarquee>
+                <div class="w-full">
+                    <Carrousel />
                 </div>
 
                 <div class="flex flex-col xs:flex-row size-full gap-3">
-                    <UButton icon="i-lucide-linkedin"
-                        class="w-full h-20 flex justify-center items-center hover:scale-105 light:hover:bg-indigo-900 transition-transform bg-indigo-400 dark:bg-secondary text-indigo-900 light:hover:text-indigo-100"
-                        to="https://www.linkedin.com/in/matheus-mpiovesan/" target="_blank">
-                        Linkedin
-                    </UButton>
+                    <SocialMediaButton link-to="https://www.linkedin.com/in/matheus-mpiovesan/" icon="i-lucide-linkedin"
+                        title="Linkedin" />
 
-                    <UButton icon="i-lucide-github"
-                        class="w-full h-20 flex justify-center items-center hover:scale-105 light:hover:bg-indigo-900 bg-indigo-400 dark:bg-secondary transition-transform text-indigo-900 light:hover:text-indigo-100"
-                        to="https://github.com/m-piovesan" target="_blank">
-                        GitHub
-                    </UButton>
+                    <SocialMediaButton link-to="https://github.com/m-piovesan" icon="i-lucide-github" title="GitHub" />
 
-                    <UButton icon="i-lucide-instagram"
-                        class="w-full h-20 flex justify-center items-center hover:scale-105 light:hover:bg-indigo-900 transition-transform bg-indigo-400 dark:bg-secondary text-indigo-900 light:hover:text-indigo-100"
-                        to="https://www.instagram.com/piovesann__/" target="_blank">
-                        Instagram
-                    </UButton>
+                    <SocialMediaButton link-to="https://www.instagram.com/piovesann__/" icon="i-lucide-instagram"
+                        title="Instagram" />
                 </div>
 
                 <USeparator :color="colorMode.value === 'dark' ? 'neutral' : 'primary'" size="sm" />
@@ -313,8 +274,8 @@ function formatMonthYear(
                         side: 'bottom',
                         sideOffset: 20
                     }" :ui="{
-                    content: 'w-48'
-                }">
+                        content: 'w-48'
+                    }">
                         <UButton label="Order by" icon="i-lucide-arrow-down-up" color="neutral" variant="outline" />
                     </UDropdownMenu>
 
@@ -322,8 +283,8 @@ function formatMonthYear(
                         side: 'bottom',
                         sideOffset: 8
                     }" :ui="{
-                    content: 'w-48'
-                }">
+                        content: 'w-48'
+                    }">
                         <UButton label="Filter by" icon="i-lucide-funnel" color="neutral" variant="outline" />
                     </UDropdownMenu>
 
@@ -340,9 +301,7 @@ function formatMonthYear(
             </UChangelogVersions>
 
             <div v-else class="flex flex-col size-full justify-center items-center gap-4 py-20">
-                <p class="text-center text-sm/snug text-secondary">No posts found with the selected filters, but take
-                    this cool
-                    pikachu instead :D</p>
+                <p class="text-center text-sm/snug text-secondary">{{ $t('pikachu') }}</p>
                 <NuxtImg src="/pikachu.gif" sizes="900px" />
             </div>
         </UMain>
