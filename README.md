@@ -4,7 +4,7 @@ This project is my personal portfolio, designed to present my professional exper
 
 The main concept is inspired by social media timelines, using platforms like Twitter/X as a reference. Each post represents a moment, achievement, or interest, allowing visitors to explore both my technical expertise and personal milestones through an interactive timeline experience.
 
-# ✨ Features
+## ✨ Features
 
 - Timeline-based layout inspired by social media
 - Multilingual support (i18n)
@@ -45,7 +45,7 @@ This project was built with:
 The portfolio is available at: https://m-piovesan.vercel.app/
 
 ## 📌 Structure
-
+```
 app/
 ├── components/      # UI components
 ├── content/         # Timeline and badge definitions
@@ -53,7 +53,7 @@ app/
 ├── public/          # Static assets (post images, OG images)
 ├── types/           # TypeScript types
 └── assets/          # CSS and styling definitions
-
+```
 ## 👋 Final note
 
 If you’re a recruiter, developer, or just curious, feel free to explore the timeline and connect with me through the links available on my profile / at the website :)
