@@ -213,7 +213,9 @@ function isBadgeSelected(badgeLabel: Badge['label']) {
                 <NuxtImg src="/pikachu.gif" sizes="900px" />
             </div>
 
-            <p class="text-sm/snug slg:hidden">Matheus Piovesan © 2025</p>
+            <div class="flex w-full justify-center slg:hidden pt-6">
+                <span class="text-sm/snug">Matheus Piovesan © 2025</span>
+            </div>
         </UMain>
     </UPage>
 </template>
