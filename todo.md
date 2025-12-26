@@ -5,6 +5,8 @@
 [ ] - pensar na paleta
 [X] - mudar cor traço indicator warning
 [ ] - ver se tem como deixar só mês e ano na timeline - stand by, limpar código depois se não der
+[X] - colocar foto ufpr e united
+[X] - adicionar desc GES
 
 responsiveness:
 [X] - timeline

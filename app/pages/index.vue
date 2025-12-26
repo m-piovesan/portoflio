@@ -44,7 +44,6 @@ const timeline: Post[] = [
         title: $t('ufprTitle'),
         description: $t('ufprDesc'),
         date: new Date('2022-06-07T00:00:00.000Z'),
-        image: 'https://nuxt.com/assets/blog/v3.16.png',
         badge: 'Academic',
     },
     {
@@ -64,7 +63,24 @@ const timeline: Post[] = [
         description: $t('unitedDesc'),
         date: new Date('2021-04-17T00:00:00.000Z'),
         badge: 'Professional',
+        image: "/united.png",
     },
+    {
+        title: $t('gesTitle'),
+        description: $t('gesDesc'),
+        date: new Date('2025-10-21T00:00:00.000Z'),
+        badge: 'Professional',
+        image: "/ges.png",
+    },
+    {
+        title: $t('spotTitle'),
+        description: $t('spotDesc'),
+        date: new Date('2025-12-05T00:00:00.000Z'),
+        badge: 'Hobbies',
+        image: "/spot.png",
+        to: 'https://musicboard.app/piovesan',
+        target: '_blank'
+    }
 ]
 
 const badgeDefinitions: Badge[] = [
@@ -240,6 +256,8 @@ function formatMonthYear(
 
                         <SocialMediaButton link-to="https://www.instagram.com/piovesann__/" icon="i-lucide-instagram"
                             title="Instagram" />
+
+                        <p class="text-sm/snug">Matheus Piovesan © 2025</p>
                     </div>
                 </div>
 
