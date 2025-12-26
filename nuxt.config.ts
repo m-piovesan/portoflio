@@ -8,6 +8,11 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/i18n'
   ],
+   app: {
+    head: {
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    }
+  },
   css: ['~/assets/css/main.css'],
   image: {
     domains: ['nuxt.com']
