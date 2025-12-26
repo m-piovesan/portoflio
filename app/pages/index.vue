@@ -35,7 +35,7 @@ const timeline: Post[] = [
         title: $t('mindtechTitle'),
         description: $t('mindtechDesc'),
         date: new Date('2024-09-10T00:00:00.000Z'),
-        image: "/mind.jpeg",
+        image: "timeline/mind.jpeg",
         to: 'https://www.linkedin.com/posts/matheus-mpiovesan_pt-br-boa-noite-rede-fecho-esta-activity-7385090039875186688-cWSL?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADUVanIBYZwx8c79yb7EwwwpYC2MlrxXFk8',
         badge: 'Professional',
         target: "_blank"
@@ -63,21 +63,21 @@ const timeline: Post[] = [
         description: $t('unitedDesc'),
         date: new Date('2021-04-17T00:00:00.000Z'),
         badge: 'Professional',
-        image: "/united.png",
+        image: "timeline/united.png",
     },
     {
         title: $t('gesTitle'),
         description: $t('gesDesc'),
         date: new Date('2025-10-21T00:00:00.000Z'),
         badge: 'Professional',
-        image: "/ges.png",
+        image: "timeline/ges.png",
     },
     {
         title: $t('spotTitle'),
         description: $t('spotDesc'),
         date: new Date('2025-12-05T00:00:00.000Z'),
         badge: 'Hobbies',
-        image: "/spot.png",
+        image: "timeline/spot.png",
         to: 'https://musicboard.app/piovesan',
         target: '_blank'
     }

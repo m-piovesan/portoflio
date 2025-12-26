@@ -3,4 +3,4 @@ Allow: /
 Disallow:
 
 # Human-readable info
-# https://seusite.com/humans.txt
+# https://m-piovesan.vercel.app/humans.txt
