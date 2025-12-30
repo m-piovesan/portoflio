@@ -102,9 +102,9 @@ function isBadgeSelected(badgeLabel: Badge['label']) {
         </div>
     </div>
 
-    <UPage class="lg:grid-cols-11! lg:gap-4! bg-indigo-100 dark:bg-gray-950">
+    <UPage class="lg:grid-cols-12! lg:gap-4! bg-indigo-100 dark:bg-gray-950">
         <template #left>
-            <UPageAside class="p-0! pr-2! lg:col-span-3!">
+            <UPageAside class="p-0! pr-2! lg:col-span-4!">
                 <div class="flex flex-col size-full gap-6 pt-6 pl-12">
                     <div class="flex flex-row items-center justify-center size-full gap-3">
                         <UDropdownMenu :items="items" class="cursor-pointer" :content="{
@@ -154,7 +154,7 @@ function isBadgeSelected(badgeLabel: Badge['label']) {
             </UPageAside>
         </template>
 
-        <UMain class="lg:col-span-9!">
+        <UMain class="lg:col-span-8!">
             <div class="flex flex-col items-center justify-center size-full gap-6 p-3 pt-18 slg:hidden">
                 <div class="flex flex-col size-full gap-2">
                     <span class="text-indigo-900 dark:text-secondary">$ whoami</span>
@@ -182,8 +182,8 @@ function isBadgeSelected(badgeLabel: Badge['label']) {
                         side: 'bottom',
                         sideOffset: 20
                     }" :ui="{
-                            content: 'w-48'
-                        }">
+                        content: 'w-48'
+                    }">
                         <UButton :label="$t('orderBy')" icon="i-lucide-arrow-down-up" color="neutral"
                             variant="outline" />
                     </UDropdownMenu>
@@ -192,8 +192,8 @@ function isBadgeSelected(badgeLabel: Badge['label']) {
                         side: 'bottom',
                         sideOffset: 8
                     }" :ui="{
-                            content: 'w-48'
-                        }">
+                        content: 'w-48'
+                    }">
                         <UButton :label="$t('filterBy')" icon="i-lucide-funnel" color="neutral" variant="outline" />
                     </UDropdownMenu>
                 </div>
