@@ -1,8 +1,18 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
 useSeoMeta({
-    title: 'Matheus Piovesan - Dev',
-    description:
-        'Front-end developer especializado em React, Vue, TypeScript e design de interfaces acessíveis.',
+    title: () => t('headerTitle') + ' | Matheus Piovesan',
+    description: () => t('headerDesc'),
+    ogTitle: () => t('headerTitle') + ' | Matheus Piovesan',
+    ogDescription: () => t('headerDesc'),
+    ogImage: 'https://github.com/m-piovesan.png',
+    ogUrl: 'https://m-piovesan.vercel.app',
+    ogType: 'website',
+    twitterCard: 'summary_large_image',
+    twitterTitle: () => t('headerTitle') + ' | Matheus Piovesan',
+    twitterDescription: () => t('headerDesc'),
+    twitterImage: 'https://github.com/m-piovesan.png',
 })
 
 useHead({

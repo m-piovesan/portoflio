@@ -18,6 +18,7 @@ export default defineNuxtConfig({
     domains: ['nuxt.com']
   },
   i18n: {
+    baseUrl: 'https://m-piovesan.vercel.app',
     defaultLocale: 'en',
     locales: [
       { code: 'en', name: 'English', file: 'en.yml' },

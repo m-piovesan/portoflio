@@ -80,10 +80,10 @@ function isBadgeSelected(badgeLabel: Badge['label']) {
             class="relative min-h-64 xs:min-h-50 bg-secondary dark:bg-gray-950 flex justify-center xs:justify-around flex-col xs:flex-row items-center gap-4 dark:border-b dark:border-amber-50/10 py-8 xs:py-12 z-10 shadow-sm">
             <div class="flex flex-col gap-6 text-center items-center relative z-20">
                 <div class="flex flex-col gap-1 size-full">
-                    <span
+                    <h1
                         class="text-transparent bg-clip-text bg-linear-to-r from-indigo-100 to-blue-300 dark:from-blue-400 dark:to-indigo-300 font-bold text-2xl tracking-tight transition-all duration-300 hover:scale-[1.02]">{{
-                            $t('headerTitle') }}</span>
-                    <span class="text-sm text-indigo-900 dark:text-indigo-100 font-medium">{{ $t('headerDesc') }}</span>
+                            $t('headerTitle') }}</h1>
+                    <h2 class="text-sm text-indigo-900 dark:text-indigo-100 font-medium">{{ $t('headerDesc') }}</h2>
                 </div>
 
                 <div class="flex flex-col gap-3 md:hidden items-center w-60">
